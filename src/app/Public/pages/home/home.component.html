@@ -1,0 +1,90 @@
+
+
+
+<h3 class="fs-17 fw-500 color-wh  pb-2">Popular</h3>
+
+<owl-carousel-o [options]="PopularOption">
+  <ng-container *ngFor="let alltracke of alltrackes">
+    <ng-template carouselSlide [id]="alltracke.id">
+      <div class="tb-music-box-md music">
+        <img [src]="alltracke.img">
+        <div class="overlayer  top-0 position-absolute w-100 h-100 align-items-start  p-2 linear-black player">
+          <div class="position-relative w-100 h-100 justify-content-between flex-column d-flex">
+            <button class="menu trans-me w-100 d-flex justify-content-end align-items-center color-wh fs-11" ><i
+                class="fas fa-ellipsis-v"></i></button>
+            <div class="toggles">
+            </div>
+            <div class="song-lower d-flex">
+              <button class="trans-me pr-2 color-sv play" (click)="gettrackeByID(alltracke.id)"><i class="fas fa-play"></i></button>
+              <div class="song-info">
+                <h4 class="color-wh fs-14 fw-600 text-uppercase mb-0">{{ alltracke.name }}</h4>
+                <h5 class="color-sv fs-11 fw-300">{{ alltracke.band }}</h5>
+              </div>
+            </div>
+            <div class="dropdown position-absolute"></div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
+</owl-carousel-o>
+
+<h3 class="fs-17 fw-500 color-wh  pb-2 mt-4">New Release</h3>
+<owl-carousel-o [options]="PopularOption">
+  <ng-container *ngFor="let alltracke of alltrackes">
+    <ng-template carouselSlide [id]="alltracke.id">
+      <div class="tb-music-box-md music">
+        <img [src]="alltracke.img">
+        <div class="overlayer  top-0 position-absolute w-100 h-100 align-items-start  p-2 linear-black player">
+          <div class="position-relative w-100 h-100 justify-content-between flex-column d-flex">
+            <button class="menu trans-me w-100 d-flex justify-content-end align-items-center color-wh fs-11" ><i
+                class="fas fa-ellipsis-v"></i></button>
+            <div class="toggles">
+            </div>
+            <div class="song-lower d-flex">
+              <button class="trans-me pr-2 color-sv play" (click)="gettrackeByID(alltracke.id)"><i class="fas fa-play"></i></button>
+              <div class="song-info">
+                <h4 class="color-wh fs-14 fw-600 text-uppercase mb-0">{{ alltracke.name }}</h4>
+                <h5 class="color-sv fs-11 fw-300">{{ alltracke.band }}</h5>
+              </div>
+            </div>
+            <div class="dropdown position-absolute"></div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
+</owl-carousel-o>
+
+<h3 class="fs-17 fw-500 color-wh  pb-2 mt-4">Recommend Albums</h3>
+<owl-carousel-o [options]="PopularOption">
+  <ng-container *ngFor="let slide of alltrackes">'
+    <ng-template carouselSlide [id]="slide.id">
+      <div class="tb-music-box-sm secBrowse1  d-grid ">
+        <img [src]="slide.img">
+        <div class="overlay">
+            <ion-icon name="ellipsis-vertical-outline" class="icon1" ></ion-icon>
+            <ion-icon name="caret-forward-circle-outline" class="icon"></ion-icon>
+        </div>
+        <div class="musicInfo">
+            <h3 class="fs-12 fw-400 pl-2 pt-3 color-wh">{{ slide.name }}</h3>
+            <h4 class="fs-12 fw-400 pl-2 pb-3 color-wh color-sv">{{ slide.band }}</h4>
+        </div>
+    </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>
+
+<footer class="pt-5 mb-4 pb-5 border-top">
+  <p class="fs-12 color-sv">@ Copyright 2021 Waveme Theme. All Rights Reserved</p>
+  <ul class="navbar-nav fs-12 color-wh flex-row">
+      <li class="nav-item pr-2">Service Terms</li>
+      <li class="nav-item pr-2">Music Policy</li>
+      <li class="nav-item pr-2">Cookie Warnings</li>
+      <li class="nav-item pr-2">Support</li>
+      <li class="nav-item pr-2">Feedback</li>
+  </ul>
+</footer>
+

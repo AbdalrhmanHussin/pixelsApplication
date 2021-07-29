@@ -1,0 +1,48 @@
+/* login screen */
+
+.rowlogin{
+    background-color: #1a1f24;
+    max-width: 400px;
+    min-height: 400px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.input-group{
+    margin-top: 15px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid white;
+
+}
+.input-group .form-control{
+    border: none;
+    outline: none ;
+    box-shadow: none;
+    background: transparent !important;
+    padding: 10px;
+    color: white;
+    font-size: 13px;
+}
+
+.input-group .form-control::placeholder{
+    font-size: 13px;
+}
+
+.btnlog{
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+    color: var(--black) !important;
+    border: 0;
+   outline: none;
+   border-radius: 30px;
+}
+
+/* Register */
+.rowRegister{
+    background-color: #1a1f24;
+    height: 430px;
+    width: 400px;
+    border: 1px solid white;
+    border-radius: 10px;
+
+}

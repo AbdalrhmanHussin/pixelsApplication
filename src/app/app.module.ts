@@ -1,14 +1,49 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import routes from './app-routing.module';
 import { AppComponent } from './app.component';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { PagesComponent } from './Public/pages/pages.component';
+import { LoginComponent } from './Public/users/login/login.component';
+import { SignupComponent } from './Public/users/signup/signup.component';
+import { NavbarComponent } from './Public/Layers/navbar/navbar.component';
+import { SidenavComponent } from './Public/Layers/sidenav/sidenav.component';
+import { MusicplayerComponent } from './Public/Layers/musicplayer/musicplayer.component';
+import { HomeComponent } from './Public/pages/home/home.component';
+import { BrowseComponent } from './Public/pages/browse/browse.component';
+import { ChartsComponent } from './Public/pages/charts/charts.component';
+import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
+import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PagesComponent,
+    LoginComponent,
+    SignupComponent,
+    NavbarComponent,
+    SidenavComponent,
+    MusicplayerComponent,
+    HomeComponent,
+    BrowseComponent,
+    ChartsComponent,
+    NewreleaseComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    IonicModule.forRoot(),
+    BrowserAnimationsModule,
+    RouterModule,
+    CarouselModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

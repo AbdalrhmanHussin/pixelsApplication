@@ -1,0 +1,123 @@
+@media only screen and (max-width: 992px)  {
+    .tb-page {
+        max-width:calc(100% - 7.5vw * 2) ;
+    }
+    
+    aside,
+    aside .content {
+        max-width: 64px;
+    }
+    aside span {
+        display: none;
+    }
+    aside .splitter {
+        margin: 0 !important;
+    }
+    aside li {
+        padding: 9px 0;
+    }
+    .tb-page {
+        max-width:calc(100% - 7.5vw * 2) ;
+    }
+    
+    aside,
+    aside .content {
+        max-width: 64px;
+    }
+    aside span {
+        display: none;
+    }
+    aside .splitter {
+        margin: 0 !important;
+    }
+    aside li {
+        padding: 9px 0;
+    }
+    form.search-form {
+        display: none !important;
+    }
+    .navbar-nav .container-fluid.grid-custom {
+        grid-template-columns: 50% 50% !important;
+    }
+}
+@media only screen and (max-width: 781px) {
+    aside {
+        width: 0 !important;
+        transform: translateX(-1000px);
+    }
+    .tb-page {
+        max-width: calc(100% - 2.5vw * 2);
+    }
+    nav .container-fluid.grid-custom {
+        grid-template-columns: 26.5% 45% 28.5%;
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    nav form.d-flex  {
+        display: none !important;
+    }
+    nav .container-fluid.grid-custom {
+        grid-template-columns: 50% 50%;
+    }
+    nav .sign p {
+        font-size: 17px;
+    }
+    nav .sign p span {
+        display: none;
+    }
+    .tb-page {
+        width: 100% !important;
+        max-width: none !important;
+    }
+    .owl-carousel .owl-nav {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width:480px) {
+    .footer ul {
+        font-size: 9px;
+    }
+}
+
+@media only screen and (max-width: 781px) {
+    aside {
+        width: 0;
+        transform: translateX(-1000px);
+    }
+    .tb-page {
+        max-width: calc(100% - 2.5vw * 2);
+    }
+    nav .container-fluid.grid-custom {
+        grid-template-columns: 26.5% 45% 28.5%;
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    nav form.d-flex  {
+        display: none !important;
+    }
+    nav .container-fluid.grid-custom {
+        grid-template-columns: 50% 50%;
+    }
+    nav .sign p {
+        font-size: 17px;
+    }
+    nav .sign p span {
+        display: none;
+    }
+    .tb-page {
+        width: 100% !important;
+        max-width: none !important;
+    }
+    .owl-carousel .owl-nav {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width:480px) {
+    .footer ul {
+        font-size: 9px;
+    }
+}
