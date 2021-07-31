@@ -147,10 +147,7 @@ export class MusicplayerComponent implements OnInit {
     this.read.musictrack.subscribe((data)=>{
       if(data){
         this.playCounter=this.payload.length;
-        console.log("music rania",data);
-        this.payload.push(data);
-        console.log("raniaaaa",this.payload);
-     
+        this.payload.push(data);     
         this.ready(this.playCounter);
       }
       

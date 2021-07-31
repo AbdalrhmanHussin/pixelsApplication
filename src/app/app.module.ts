@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import routes from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +18,14 @@ import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
-
-
+import * as $ from 'jquery';
+import { UserConfigService } from './Services/user-config.service';
+import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
+import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
+// function userConfig(user: UserConfigService) {
+//   // do the async tasks at here
+//   return () => user.snipToken()
+// }
 
 @NgModule({
   declarations: [
@@ -33,7 +39,9 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     BrowseComponent,
     ChartsComponent,
-    NewreleaseComponent
+    NewreleaseComponent,
+    PlaylistComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +53,17 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    // UserConfigService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: userConfig,
+    //   multi: true,
+    //   deps: [UserConfigService]
+    // }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ 
+ }

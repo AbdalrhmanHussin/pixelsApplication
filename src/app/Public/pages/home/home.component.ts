@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { OwlConfigService } from 'src/app/Services/owl-config.service';
 import { ReadConfigService } from 'src/app/Services/read-config.service';
+import { UserConfigService } from 'src/app/Services/user-config.service';
 import { Music } from 'src/app/_model/music';
+import { PagesComponent } from '../pages.component';
+declare var $: any;
+
 
 @Component({
   selector: 'app-home',
@@ -12,9 +15,7 @@ export class HomeComponent implements OnInit {
 
   private limit: number =10;
   //Popular
-  PopularOption:any = this.owl.customOptions;
   PopularSlides:any = this.read.Popular;
-
   NewSlides:any = this.read.New;
 
 
@@ -22,20 +23,18 @@ export class HomeComponent implements OnInit {
  //iserror:boolean=false;
   
 
-  constructor(public owl:OwlConfigService,public read:ReadConfigService) { }
-
+  constructor(public owl:PagesComponent,public read:ReadConfigService,public user:UserConfigService) { }
+  
+  
   ngOnInit(): void {
-    var slides:Window = this.PopularSlides;;
-    console.log(this.PopularSlides);
+  
     this.read.getalltracks(this.limit).subscribe((musics: Music[]) => {
-         this.alltrackes = musics;         
-    }, error => {
-    //    this.iserror=true;
-    //    setTimeout(() => {
-    //     this.iserror=false;
-    //    },2000);
-
-     })
+         this.alltrackes = musics;
+         setTimeout(() => {
+          this.owl.loadOwl('5rowInit')
+          this.owl.loadOwl('4rowInit')
+        }, 10); 
+    });
   }
   
   gettrackeByID(id:number):void{
@@ -47,10 +46,6 @@ export class HomeComponent implements OnInit {
            res.music.band,
           res.music.img
           ]);
-            
-
-         
-
         }
         console.log(res);
         
@@ -60,4 +55,5 @@ export class HomeComponent implements OnInit {
       });
   }
 
+ 
 }

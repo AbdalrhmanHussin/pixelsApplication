@@ -25,11 +25,7 @@ export class LoginComponent implements OnInit {
       this.http.post('http://127.0.0.1:8000/api/login',data).subscribe((res:any)=>{
            console.log(res.login);
           if(res.login == 'success') {
-              let user = {
-                'user': res.User,
-                'token': res.token
-              }
-              localStorage.setItem('User',JSON.stringify(user));
+              localStorage.setItem('User',res.token);
               
               this.router.navigate(['/']);
           } else {

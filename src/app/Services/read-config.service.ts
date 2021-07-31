@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Music } from '../_model/music';
+import { playlist } from '../_model/playlist';
 import { NumberValueAccessor } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -31,7 +32,13 @@ export class ReadConfigService {
   private Url='http://127.0.0.1:8000/api/';
   constructor(private http:HttpClient) {}
   
-  
+  getPlaylist(id:number):Observable<playlist[]> {
+    let sanctum = localStorage.getItem('User');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${sanctum}`
+    });
+    return this.http.post<playlist[]>(this.Url + 'playlist/show/' + id,null,{headers: headers});
+  }
   getalltracks(limit: number): Observable<Music[]> {
     return this.http.get<Music[]>(this.Url + 'bundle/popularity/' + limit);
   }

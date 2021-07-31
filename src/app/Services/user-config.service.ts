@@ -1,5 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { user } from '../_model/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,25 +10,30 @@ import { Injectable } from '@angular/core';
 export class UserConfigService {
   protected $user:{} = [];
   constructor(protected http:HttpClient) { }
-  snipToken(token:string) {
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    })
-     this.http.post('http://127.0.0.1:8000/api/snip',{headers: headers}).subscribe((res)=>{
-        console.log(res);
-     });
+  private userConfig:any;
+  test() {
+    console.log('hello');
   }
-  setUser() {
-    let email = localStorage.getItem('User');
-    let user = {
-      'email': email
-    }
+  getUser(): Observable<user[]> {
+    let sanctum = localStorage.getItem('User');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${sanctum}`
+    });
+     return this.http.post<user[]>('http://localhost:8000/api/snip',null,{headers: headers});
+  }
+  // snipToken() {
+  //   if(localStorage.getItem('User') !== null) {
     
-     this.$user = user;
-     return email;
-  }
-  getUser() {
-    return this.$user;
-  } 
+  //     return this.http.post('http://localhost:8000/api/snip',null,{headers: headers})
+  //     .subscribe((res)=>{
+  //       this.userConfig = res;
+  //       console.log('appModule');
+  //     });
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  // async getUser() {
+  //    return  this.snipToken();
+  // } 
 }

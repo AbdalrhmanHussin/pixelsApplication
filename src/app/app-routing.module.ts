@@ -3,8 +3,11 @@ import { BrowseComponent } from './Public/pages/browse/browse.component';
 import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { HomeComponent } from './Public/pages/home/home.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
+import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
 import { PagesComponent } from './Public/pages/pages.component';
+import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { LoginComponent } from './Public/users/login/login.component';
+import { SignupComponent } from './Public/users/signup/signup.component';
 
 const routes: Routes = [
   { 
@@ -26,11 +29,14 @@ const routes: Routes = [
       {
         path: 'charts',
         component: ChartsComponent
-        },
+      },
 
   ]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: SignupComponent },
+  { path: 'playlist/:id', component: PlaylistComponent },
+  { path: '**', component: NotFoundComponent  }
 ];
 
 export default routes;

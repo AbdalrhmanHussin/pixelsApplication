@@ -1,4 +1,4 @@
-<aside class="">
+<aside class="border-right">
     <div class="position-fixed border-r pl-4 pt-4 content">
          <p class="color-gr fs-12"><span>Browse</span></p>
          <ul class="navbar-nav">
@@ -11,7 +11,8 @@
          <ul class="navbar-nav">
              <li class="nav-item color-sv"><ion-icon name="grid-outline"></ion-icon><span>Playlists</span></li>
              <li class="nav-item color-sv"><ion-icon name="people-outline"></ion-icon><span>Profile</span></li>
-             <li class="nav-item color-sv"><ion-icon name="log-in-outline"></ion-icon><span>Login</span></li>
+             <li class="nav-item color-sv" *ngIf="!token"><ion-icon name="log-in-outline"></ion-icon><span><a href="/login">Login</a></span></li>
+             <li class="nav-item color-sv" *ngIf="token" (click)="logout()" ><ion-icon name="log-in-outline"></ion-icon><span>Logout</span></li>
              <li class="nav-item d-flex justify-content-start align-item-center">
                  <label class="switch">
                      <input type="checkbox" class="d-none" checked>

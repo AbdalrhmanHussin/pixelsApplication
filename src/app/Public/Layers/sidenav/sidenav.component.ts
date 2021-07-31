@@ -9,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class SidenavComponent implements OnInit {
  
   constructor() { }
-   
+  token:any = localStorage.getItem('User') ?? null;
+  logout() {
+    localStorage.removeItem('User');
+    window.location.reload()
+  }
   ngOnInit(): void {
     
   }
