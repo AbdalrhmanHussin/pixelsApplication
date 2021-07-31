@@ -32,6 +32,7 @@
                 <div class="bar" id="volBall" (mouseenter)="volume($event)" [style.width]="volwidth"></div>
                 <div class="ball  position-absolute" id="ballVl" [style.left]="volwidth"></div>
             </div>
+            <div><i [ngClass]="isfav ? 'fas' : 'far'" class="fa-heart" style="color: white;" (click)='toggelfavicon()'></i></div>
       </div>
    </div>
    <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn">

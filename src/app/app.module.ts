@@ -22,6 +22,7 @@ import * as $ from 'jquery';
 import { UserConfigService } from './Services/user-config.service';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
+import { ProfileComponent } from './Public/pages/profile/profile.component';
 // function userConfig(user: UserConfigService) {
 //   // do the async tasks at here
 //   return () => user.snipToken()
@@ -41,7 +42,8 @@ import { NotFoundComponent } from './Public/pages/not-found/not-found.component'
     ChartsComponent,
     NewreleaseComponent,
     PlaylistComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,8 @@ export class MusicplayerComponent implements OnInit {
   trigger:boolean = false;
   vol:boolean = false;
   scope:any;
+ isfav:boolean=false;
+  private currentMusic:any = '';
   payload:any[] = [
 
    [ '1tT3YaSxjF9U5fwPxjyuGQGeoR6K6XwUa','Imagine Dragon','Natural','http://music.flatfull.com/waveme/wp-content/uploads/sites/2/2020/09/Artboard-28.png'],
@@ -72,6 +74,7 @@ export class MusicplayerComponent implements OnInit {
     return min + ':' + sec;
   }
   play() {
+ 
     if(this.music.src == "") {
       this.load();
     }
@@ -143,12 +146,29 @@ export class MusicplayerComponent implements OnInit {
       console.log(this.playlistLocker);
   }
    /*rania start*/
+   
   ngOnInit(): void {
+  
     this.read.musictrack.subscribe((data)=>{
       if(data){
-        this.playCounter=this.payload.length;
-        this.payload.push(data);     
-        this.ready(this.playCounter);
+        // 0 src.....
+        if(this.currentMusic==data[0]){
+          console.log('play');
+          
+          this.play();
+        } else {
+          console.log('stop');
+          this.playCounter=this.payload.length;
+          this.payload.push(data);     
+          this.ready(this.playCounter);
+        }
+        this.currentMusic=data[0];
+          
+        console.log(data);
+          
+
+        
+       
       }
       
        
@@ -206,4 +226,7 @@ export class MusicplayerComponent implements OnInit {
  })
   }
 
+  toggelfavicon(){
+    this.isfav=!this.isfav;
+  }
 }
