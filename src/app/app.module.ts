@@ -43,7 +43,7 @@ import { ProfileComponent } from './Public/pages/profile/profile.component';
     NewreleaseComponent,
     PlaylistComponent,
     NotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

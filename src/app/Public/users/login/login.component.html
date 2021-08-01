@@ -1,36 +1,27 @@
-<div class="tb-container d-flex justify-content-center align-items-center h-100">
-    <div class="container">
-        <div class="row justify-content-center align-items-center mt-5">
-            <div class="col-md-12 pt-5 rowlogin  ">
-                <h1 class="text-center color-wh fs-20">Login</h1>
-    
-    
-                <form action="#" method="POST"  class="userForm"  #form="ngForm" (ngSubmit)="onSubmit(form)">
-                <div class="input-group">
-                    <ion-icon name="mail-outline"class="fs-22 color-wh pt-2 pl-2"></ion-icon>
-                    <input type="text" class="form-control" name="email" placeholder="E-Mail" ngModel>
-                </div>
-    
-                <div class="input-group">
-                    <ion-icon name="lock-closed-outline" class="fs-22 color-wh pt-2 pl-2"></ion-icon>
-                    <input type="password" class="form-control" name="password" placeholder="Passward" ngModel>
-                </div>  
-                <div class="error text-white d-flex justify-content-center align-items-center fs-12 fail" *ngIf="loginFail">
-                    {{ loginFail }}
-              </div>
-                <div class="row text-center pt-3">
-                    <div class="col-md-12">
-                        <input class="btnlog color-wh mt-5" type="submit" value="SIGN IN">
-                    </div>
-                </div>
-    
-                <div class="row text-center pt-3">
-    
-                <div class="col-md-12">
-                    <a href="#"  class="fs-12 color-wh">Forget Password</a>
-                </div>
-                </div>
-            </form>
-            </div>
+<div class="login-wrapper w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+    <!--Logo Area-->
+   <div class="logo w-100 p-3 d-flex justify-content-center align-items-center">
+       <img src="../../../../assets/images/logo.png">
+   </div>
+   <div class="mail mt-5">
+      <form class="w-100" action="#" method="post" #form="ngForm" (ngSubmit)="onSubmit(form)">
+          <div class="form-group">
+              <label class="d-block">Email Address</label>
+              <input type="text" placeholder="Enter your email address" class="w-100" name="email" ngModel>
+          </div>
+          <div class="form-group">
+            <label class="d-block">Password</label>
+            <input type="password" placeholder="Enter your password" class="w-100" name="password" ngModel>
+            
         </div>
-    </div>
+        <p class="error pt-2">{{ loginFail }}</p>
+        <div class="tools d-flex mb-3">
+            <a href="http://127.0.0.1:8000/password/reset" class="forget">Forget Password ?</a>
+            <a href="#" class="signup ml-auto">Not member ?</a>
+        </div>
+        <input type="submit" value="Sign in">
+      
+
+      </form>
+   </div>
+</div>

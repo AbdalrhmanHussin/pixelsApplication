@@ -12,9 +12,7 @@ import { UserConfigService } from 'src/app/Services/user-config.service';
 export class SignupComponent implements OnInit {
 
   constructor(private http:HttpClient,private router:Router,private userData:UserConfigService) { }
-  regemail:any;
-  regpass:any;
-  regname:any;
+  validation:any;
  
   ngOnInit(): void {
   }
@@ -33,7 +31,7 @@ export class SignupComponent implements OnInit {
             
             this.router.navigate(['/']);
         } else {
-            console.log(res);
+            this.validation = res.validations;
         }
     },(err)=>{
         console.log(err);

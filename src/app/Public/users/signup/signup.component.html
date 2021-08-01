@@ -1,52 +1,34 @@
-<div class="tb-container d-flex justify-content-center align-items-center h-100">
-  <div class="container">
-    <div class="row justify-content-center align-items-center mt-5">
-      <div class="col-md-12 text-center pt-5 rowRegister">
-        <h1 class="text-center color-wh fs-20">Register</h1>
-
-        <form action="#" method="POST" class="userForm" #form="ngForm" (ngSubmit)="onSubmit(form)">
-          <div class="input-group">
-            <ion-icon name="person-circle-outline" class="fs-22 color-wh pt-2 pl-2"></ion-icon>
-            <input type="text" class="form-control" name="name" placeholder="User Name" ngModel>
-            <div class="error text-white d-flex justify-content-center align-items-center" *ngIf="regname">
-              {{ regname }}
-            </div>
-          </div>
-
-          <div class="input-group">
-            <ion-icon name="person-circle-outline" class="fs-22 color-wh pt-2 pl-2"></ion-icon>
-            <input type="text" class="form-control" name="email" placeholder="User Name" ngModel>
-            <div class="error text-white d-flex justify-content-center align-items-center" *ngIf="regname">
-              {{ regname }}
-            </div>
-          </div>
-
-          <div class="input-group">
-            <ion-icon name="person-circle-outline" class="fs-22 color-wh pt-2 pl-2"></ion-icon>
-            <input type="password" class="form-control" name="password" placeholder="User Name" ngModel>
-            <div class="error text-white d-flex justify-content-center align-items-center" *ngIf="regname">
-              {{ regname }}
-            </div>
-          </div>
-          <div class="input-group">
-            <ion-icon name="lock-closed-outline" class="fs-22 color-wh pt-2 pl-2"></ion-icon>
-            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" ngModel>
-          </div>
-
-          <div class="row text-center pt-3">
-            <div class="col-md-12">
-              <input class="btnlog color-wh mt-2" type="submit" value="SIGN UP">
-            </div>
-          </div>
-
-          <div class="row text-center pt-3">
-            <div class="col-md-12">
-              <a href="/login" class="fs-12 color-wh">Sign IN</a>
-            </div>
-          </div>
-        </form>
-
-      </div>
+<div class="login-wrapper w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+  <!--Logo Area-->
+ <div class="logo w-100 p-3 d-flex justify-content-center align-items-center">
+     <img src="../../../../assets/images/logo.png">
+ </div>
+ <div class="mail mt-5">
+    <form class="w-100" action="#" method="post" #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <div class="form-group">
+        <label class="d-block">Username</label>
+        <input type="text" placeholder="Enter your email address" class="w-100" name="name" ngModel>
+        <p class="error">{{ validation.name }}</p>
     </div>
-  </div>
+        <div class="form-group">
+            <label class="d-block">Email Address</label>
+            <input type="text" placeholder="Enter your email address" class="w-100" name="email" ngModel>
+            <p class="error">{{ validation.email }}</p>
+        </div>
+        <div class="form-group">
+          <label class="d-block">Password</label>
+          <input type="password" placeholder="Enter your password" class="w-100" name="password" ngModel>
+          <p class="error">{{ validation.password }}</p>
+      </div>
+       <div class="form-group">
+          <label class="d-block">Password Confirm</label>
+          <input type="password" placeholder="Enter your password" class="w-100" name="password_confirmation" ngModel>
+      </div>
+      <div class="tools d-flex mb-3">
+          <a href="http://127.0.0.1:8000/password/reset" class="forget">Forget Password ?</a>
+          <a href="/login" class="signup ml-auto">Already a member ?</a>
+      </div>
+      <input type="submit" value="Sign in">
+    </form>
+ </div>
 </div>

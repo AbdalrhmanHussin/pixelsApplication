@@ -11,9 +11,6 @@ export class UserConfigService {
   protected $user:{} = [];
   constructor(protected http:HttpClient) { }
   private userConfig:any;
-  test() {
-    console.log('hello');
-  }
   getUser(): Observable<user[]> {
     let sanctum = localStorage.getItem('User');
     const headers = new HttpHeaders({
