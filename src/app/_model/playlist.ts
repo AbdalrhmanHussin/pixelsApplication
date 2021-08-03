@@ -1,3 +1,4 @@
 export interface playlist {
-    playlist:Array<number>
+    name:string
+    user:number
  }

@@ -32,12 +32,21 @@ export class ReadConfigService {
   private Url='http://127.0.0.1:8000/api/';
   constructor(private http:HttpClient) {}
   
-  getPlaylist(id:number):Observable<playlist[]> {
+  getAllLists() {
     let sanctum = localStorage.getItem('User');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${sanctum}`
     });
-    return this.http.post<playlist[]>(this.Url + 'playlist/show/' + id,null,{headers: headers});
+    return this.http.post<playlist[]>(this.Url + 'playlist/show/',null,{headers: headers});
+  }
+
+  getPlaylist():Observable<playlist[]> {
+    let sanctum = localStorage.getItem('User');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${sanctum}`,
+      Accept: 'application/json'
+  });
+    return this.http.post<playlist[]>(this.Url + 'playlist/show',null,{headers: headers});
   }
   getalltracks(limit: number): Observable<Music[]> {
     return this.http.get<Music[]>(this.Url + 'bundle/popularity/' + limit);

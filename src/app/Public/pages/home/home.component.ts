@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
           this.owl.loadOwl('4rowInit')
         }, 10); 
     });
+    
   }
   
   gettrackeByID(id:number):void{
