@@ -4,6 +4,7 @@ import { Music } from '../_model/music';
 import { playlist } from '../_model/playlist';
 import { NumberValueAccessor } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { playlistData } from '../_model/playlist-data';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,19 @@ export class ReadConfigService {
   });
     return this.http.post<playlist[]>(this.Url + 'playlist/show',null,{headers: headers});
   }
+
+  getPlaylistMusics(id:any):Observable<playlistData[]> {
+    let sanctum = localStorage.getItem('User');
+    const headers = new HttpHeaders({
+        Authorization: `Bearer ${sanctum}`,
+        Accept: 'application/json'
+    });
+    let data = {
+      'id': id
+    }
+      return  this.http.post<playlistData[]>('http://127.0.0.1:8000/api/playlist/getplaylist',data,{headers: headers});
+  }
+
   getalltracks(limit: number): Observable<Music[]> {
     return this.http.get<Music[]>(this.Url + 'bundle/popularity/' + limit);
   }

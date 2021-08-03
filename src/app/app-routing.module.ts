@@ -16,7 +16,7 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
-      path: '',
+      path: 'home',
       component: HomeComponent
       },
       {
@@ -35,12 +35,17 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent
       },
-
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+      }
   ]
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: SignupComponent },
   { path: 'playlist/:id', component: PlaylistComponent },
+  { path: 'playlist', component: PlaylistComponent },
   { path: '**', component: NotFoundComponent  }
 ];
 

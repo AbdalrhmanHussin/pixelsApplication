@@ -19,27 +19,23 @@ export class OverlayComponent implements OnInit {
 
   playlists:any = [];
   playlistsKey:any;
-
   failCreate:string = '';
 
-  onClick(event: any): void
-    {
+  onClick(event: any): void {
         event.stopPropagation();
-    }
+  }
 
   /*
          Playlist Fetch
     ==========================
     data: playlist belong to the current user
   */
-  playlistFetch() {
 
+  playlistFetch() {
     this.read.getPlaylist().subscribe((res:playlist[])=>{
       this.playlists = res[0];
       this.playlistsKey = Object.keys(this.playlists);
-      console.log(this.playlists);
     });
-
   }
 
   getMusicData(id:number) {
@@ -48,18 +44,16 @@ export class OverlayComponent implements OnInit {
        return res['music']
     });
   }
+
   playlistAdd(playlist:number,id:any) {
     let sanctum = localStorage.getItem('User');
-
-    const headers = new HttpHeaders({
+    let headers = new HttpHeaders({
       Authorization: `Bearer ${sanctum}`,
       Accept: 'application/json'
-    });
-    
+    }); 
     this.http.post(`http://127.0.0.1:8000/api/playlist/add?playlistID=${playlist}&musicID=${id}`,{},{headers: headers}).subscribe((res)=>{
       this.playlistFetch();
     });
-
   }
 
   playlistCreateAdd(form: NgForm,id:any) {
@@ -69,21 +63,20 @@ export class OverlayComponent implements OnInit {
     }
 
     let sanctum = localStorage.getItem('User');
-    const headers = new HttpHeaders({
+    let headers = new HttpHeaders({
       Authorization: `Bearer ${sanctum}`,
       Accept: 'application/json'
     });
 
     this.http.post(`http://127.0.0.1:8000/api/playlist/create`,data,{headers: headers}).subscribe((res:any)=>{
-
        if(res['message'] == 'fail') {
           this.failCreate = res['validFailsMessage']['name'][0];
        } else {
         this.failCreate = '';
         this.playlistFetch();
        }
-
     });
+
   }
 
   /*
@@ -101,26 +94,23 @@ export class OverlayComponent implements OnInit {
   ngOnInit(): void {
    this.playlistFetch();
     //display overlay
+
     $('.category').on('click', '.menu', function () {
       let id:any = $(this).attr('id');
       $(".overlay").css('display', 'flex');
       setTimeout(() => {
-
         $('.overlay').addClass('active');
         $('.overlay .model').addClass('active');
-
         $('.overlay .idHolder').each(function(){
            $(this).attr('id',id);
         })
-
       }, 10);
-
     });
 
     //hide overlay
+
     $('.overlay').on('click', function (event:Event) {
       event.cancelBubble = true;
-
       $('.overlay').removeClass('active');
       $('.overlay .model').removeClass('active');
       setTimeout(() => {

@@ -1,15 +1,15 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Component,
   OnInit
 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import {
   ReadConfigService
 } from 'src/app/Services/read-config.service';
-import {
-  playlist
-} from 'src/app/_model/playlist';
+import { playlist } from 'src/app/_model/playlist';
 
-import { Music } from 'src/app/_model/music';
 
 
 @Component({
@@ -19,37 +19,30 @@ import { Music } from 'src/app/_model/music';
 })
 export class PlaylistComponent implements OnInit {
 
-  constructor(public read: ReadConfigService) {}
-  id: number = 1;
-  alltrackes: any;
-  addActive(ele:Element) {
-    ele.classList.add('active');
-  }
+  constructor(public read:ReadConfigService,private route:ActivatedRoute,private router:Router,private http:HttpClient) {}
   
-  gettrackeByID(id: number): void {
-    // this.read.gettrackeByID(id).subscribe((res: {
-    //   message: string,
-    //   music: Music
-    // }) => {
-    //   if (res.message === 'success') {
-    //     this.read.musictrack.next([
-    //       res.music.src,
-    //       res.music.name,
-    //       res.music.band,
-    //       res.music.img
-    //     ]);
-    //   }
-    // });
-  }
-  ngOnInit(): void {
-    this.read.getPlaylist().subscribe((playlist: playlist[]) => {
-      this.alltrackes = playlist;
-      let array = [];
-      for (var i in this.alltrackes) {
-        array.push(this.alltrackes[i]);
-      }
-    });
+  selectedId: number = 0;
+  
+  id:any;
 
+  playlistData:any;
+
+  playlistMusicCount:any;
+  
+
+  ngOnInit(): void {
+  
+    this.id = this.route.snapshot.paramMap.get('id');
+    let id  = +this.id;
+    if(!isNaN(this.id)) 
+       this.read.getPlaylistMusics(this.id).subscribe(res => {
+          let playlist:any  = res[0];
+          this.playlistData = playlist[0];
+          this.playlistMusicCount = this.playlistData.musics.length;
+          console.log(this.playlistData);
+       })  
+    ;else
+       this.router.navigateByUrl('notfound');
   }
 
 }

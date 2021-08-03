@@ -15,7 +15,7 @@ export class SidenavComponent implements OnInit {
     window.location.reload()
   }
   ngOnInit(): void {
-    
+     
   }
 
 

@@ -26,3 +26,8 @@ aside ion-icon {
     position: relative;
     top: 3px;
 }
+
+aside .active a,
+aside .active ion-icon {
+    color: orangered;
+}

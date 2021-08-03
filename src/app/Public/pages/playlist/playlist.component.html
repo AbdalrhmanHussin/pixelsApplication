@@ -9,28 +9,28 @@
             <img src="../../../../assets/images/daniel-lincoln-NR705beN_CU-unsplash.jpg" class="w-100 h-100">
           </div>
           <div class="music-info ml-4 mt-3">
-            <h2>Lost Cause - Chainsmoker fits</h2>
-            <p>Created At: 12 Sep 2020</p>
-            <p>Number of songs: 21 Songs</p>
+            <h2>{{ playlistData.name }}</h2>
+            <p>Created At: {{ playlistData.created_at | date:'mediumDate'}}</p>
+            <p>Number of songs: {{ playlistMusicCount }} Songs</p>
             <button class="btn">Play All</button>
           </div>
         </Div>
       </div>
     </div>
     <div class="playlist-body mt-5">
-        <Div class="song-list  container-fluid align-items-center" *ngFor="let item of alltrackes">
-            <button class="playbtn" (click)="gettrackeByID(item.id)" (click)="addActive(div)" #div>
+        <Div class="song-list  container-fluid align-items-center">
+            <button class="playbtn" #div>
               <i class="fas fa-play"></i>
             </button>
             <div class="song-info d-flex align-items-center ml-3">
-              <img [src]="item.img">
+              <img [src]="">
               <div class="ml-3">
-                <h4> {{item.name}}</h4>
+                <h4></h4>
                 <p>Sia</p>
               </div>
             </div>
             <div class="ml-5 pl-4 rel">
-              <p>Release Date: {{ item.release_date | date :'mediumDate'}}
+              <p>Release Date: 
               </p>
             </div>
             <button class="ml-auto mr-3">
