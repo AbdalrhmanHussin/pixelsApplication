@@ -5,6 +5,7 @@ import {
 import {
   ReadConfigService
 } from 'src/app/Services/read-config.service';
+import { WriteService } from 'src/app/Services/write.service';
 
 @Component({
   selector: 'app-musicplayer',
@@ -14,7 +15,7 @@ import {
 export class MusicplayerComponent implements OnInit {
 
 
-  constructor(private read: ReadConfigService) {
+  constructor(private read: ReadConfigService,private write: WriteService) {
 
   }
   path: any = 'https://drive.google.com/uc?export=download&id=';
@@ -40,10 +41,7 @@ export class MusicplayerComponent implements OnInit {
   // 1 Song name
   // 2 team name 
   // 3 song src
-  payload: any[] = [
-    ['1tT3YaSxjF9U5fwPxjyuGQGeoR6K6XwUa', 'Natural', 'Imagine the dragon', 'http://music.flatfull.com/waveme/wp-content/uploads/sites/2/2020/09/Artboard-28.png'],
-    ['11V_iZ9Q-ni3Kp_f_JTFjVcqM8csjAMGV', 'Bring me to life', 'Evanscence', 'http://music.flatfull.com/waveme/wp-content/uploads/sites/2/2020/09/Artboard-23.png'],
-  ];
+  payload: any[] = [];
   //progress bar control variable
   barwidth: any = 0;
   //volume bar control variable
@@ -143,7 +141,6 @@ export class MusicplayerComponent implements OnInit {
       let percAcc = (perc < 1 && perc > 0) ? perc : (perc < 0) ? 0 : 1;
       this.barwidth = percAcc * 100 + '%';
       this.music.currentTime = this.music.duration * percAcc;
-
     }
 
   }
@@ -183,10 +180,17 @@ export class MusicplayerComponent implements OnInit {
   /*rania start*/
 
   ngOnInit(): void {
-
+   
+    this.write.playlist.subscribe((data) => {
+       if(data !== null) {
+           this.payload = data;
+           console.log(this.payload,data)
+           this.playCounter = 0;
+           this.ready(this.playCounter);
+       }
+    });
     this.read.musictrack.subscribe((data) => {
       if (data) {
-
         if (this.currentMusic == data[0]) {
           this.play();
         } else {

@@ -38,14 +38,16 @@ export class HomeComponent implements OnInit {
     
   }
   
+
+  
   gettrackeByID(id:number):void{
       this.read.gettrackeByID(id).subscribe((res:{message:string,music:Music})=>{
         if(res.message==='success'){
           this.read.musictrack.next([
             res.music.src,
             res.music.name,
-           res.music.band,
-          res.music.img
+            res.music.band,
+            res.music.img
           ]);
         }
         console.log(res);

@@ -71,4 +71,8 @@ export class ReadConfigService {
     return this.http.get<{message:string,music:Music}>(`${this.Url}show/${id}`);
   }
 
+  getPlaylistFetch(playlist:any) {
+    return playlist;
+  }
+
 }
