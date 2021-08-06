@@ -1,25 +1,26 @@
 <div class="tb-container d-flex">
   <div class="playlist mt-0 position-relative" style="background-image:  linear-gradient(356deg
-  ,#101010,#101010,#10101082,transparent),url('{{ playlistData.musics[0].img  }}');" >
+  ,#101010,#101010,#10101082,transparent),url('{{ playlistDisplayImg }}');" >
     <div class="playlist-header" >
       <div class="btn-area d-flex  ml-auto">
-         <button class="btn btn-danger">Delete</button>
+         <button class="btn btn-danger" *ngIf="(playlistMusicCount == 0) false">Delete</button>
       </div>
       <div class="container">
         <Div class="row mt-5">
           <div class="playlist-poster p-3">
-            <img src="{{ playlistData.musics[0].img }}" class="w-100 h-100">
+            <img src="{{ playlistDisplayImg }}" class="w-100 h-100 playlistPortera">
           </div>
-          <div class="music-info ml-4 mt-3">
+          <div class="music-info ml-4 mt-3" *ngIf="(playlistMusicCount > 0) true : false;">
             <h2>{{ playlistData.name }}</h2>
             <p>Created At: {{ playlistData.created_at | date:'mediumDate'}}</p>
+            <p>Number Of Songs: {{ playlistMusicCount  }}</p>
             <button class="btn" (click)="getPlaylistAction()">Play All</button>
           </div>
         </Div>
       </div>
     </div>
-    <div class="playlist-body mt-5">
-        <Div class="song-list  container-fluid align-items-center" *ngFor="let item of playlistData.musics;let indexEle=index" #song>
+    <div class="playlist-body mt-5" *ngIf="(playlistMusicCount > 0) true : false;">
+        <Div class="song-list  container-fluid align-items-center" *ngFor="let item of playlistData.musics;let indexEle=index" #song >
             <button class="playbtn" #div (click)="getPlaylistAction(indexEle)">
               <i class="fas fa-play"></i>
             </button>
@@ -27,13 +28,13 @@
               <img [src]="item.img">
               <div class="ml-3">
                 <h4>{{ item.name }}</h4>
-                <p>Sia</p>
+                <p>{{ item.band }}</p>
               </div>
             </div>
             <div class="ml-5 pl-4 rel">
               <p>Release Date: {{ playlistData.created_at | date:'mediumDate'}}</p>
             </div>
-            <button class="ml-auto mr-3" (click)="playlistRemove(item.id,song)" (click)="removeFromPayload(indexEle)">
+            <button class="ml-auto mr-3" (click)="playlistRemove(item.id,song)" (click)="removeFromPayload(indexEle,playlistData.id)">
               Remove
             </button>
           </Div>

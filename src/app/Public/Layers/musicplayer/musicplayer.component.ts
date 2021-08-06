@@ -57,19 +57,20 @@ export class MusicplayerComponent implements OnInit {
    playlistColor = true;
    shuffleColor  = true;
    isLikeProps :boolean=false;
-   jsonStatus = JSON.parse(localStorage.getItem('playingType') || '{}' ) ?? '' ;
+   playingPlaylist = JSON.parse(localStorage.getItem('playingType') || '{}' ) ?? '' ;
    oldActive:any;
 
   
   load() {
-    this.isLike();
-    this.checkPlayCounter();
     this.loader=true;
     this.music.src = this.path + this.payload[this.playCounter][0];
     this.currentMusic = this.path + this.payload[this.playCounter][0];
     this.playImg = this.payload[this.playCounter][3];
     this.songTitle = this.payload[this.playCounter][2];
     this.band = this.payload[this.playCounter][1];
+    this.isLike();
+    this.checkPlayCounter();
+    this.playlistImgLooping(this.playImg);
     this.music.addEventListener('loadeddata', (): void => {
       this.loader = false;
       this.time = this.timeSet(this.music.duration);
@@ -186,17 +187,19 @@ export class MusicplayerComponent implements OnInit {
     this.shuffleLocker = (this.shuffleLocker == 1) ? 0 : 1;
     this.shuffleColor  = (this.shuffleColor == false) ? true : false;
   }
+
+  playlistImgLooping(img:string) {
+    this.write.playlistDisplayImg.next(img);
+  }
   /*rania start*/
 
   ngOnInit(): void {
+    this.write.payloadExport.next(this.payload);
     this.write.deleteFromList.subscribe((data) => {
       if(data !== null) {
-        this.activeRouter.snapshot.params['id'];
-        console.log(this.jsonStatus.id , this.activeRouter.snapshot.params['id']);
-        if(this.jsonStatus.id == this.activeRouter.snapshot.params['id'])  {
-           this.payload.splice(data,1);
-           console.log(this.payload);
-        }
+         if(data.playlistID == this.playingPlaylist.id) {
+            this.payload.splice(data.musicID,1);
+         } 
       }
     })
 
@@ -227,9 +230,11 @@ export class MusicplayerComponent implements OnInit {
         this.currentMusic = data[0];
       }
     });
+    
     /*rania end*/
     this.music.volume = 0.5;
-    let ball: any = document.getElementById('ball');
+    let ball:any = document.getElementById('ball');
+    console.log($());
     let ballVl: any = document.getElementById('ballVl');
     ball.addEventListener('mousedown', (): void => {
       this.trigger = true;

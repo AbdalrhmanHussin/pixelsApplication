@@ -39,6 +39,10 @@ const routes: Routes = [
         path: 'playlist/:id', 
         component: PlaylistComponent
       },
+      { 
+        path: 'playlist', 
+        component: PlaylistComponent
+      },
       {
         path: '',
         redirectTo: '/home',

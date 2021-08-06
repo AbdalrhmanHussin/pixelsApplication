@@ -45,14 +45,17 @@ export class PlaylistComponent implements OnInit {
   playlistID:number    = 0;
 
   jsonStatus = JSON.parse(localStorage.getItem('playingType') || '{}');
+
+  playlistDisplayImg:any = "../../../../assets/images/noimg.jfif";
   
   getPlaylistAction(index:number = 0) {
     let data = {
       'playingType': 'playlist',
       'id'         :  this.id
     }
-    localStorage.setItem('playingType',JSON.stringify(data))
+    localStorage.setItem('playingType',JSON.stringify(data));
     this.transferePlaylist(this.playlistArray,index);
+    this.getActiveList();
   }
 
   transferePlaylist(playlist:any,playCounter:number = 0) {
@@ -60,14 +63,17 @@ export class PlaylistComponent implements OnInit {
   }
   
   getActiveList() {
+    this.write.playlistDisplayImg.subscribe((res) => {
+       this.playlistDisplayImg = res;
+    })
     this.write.playCounterActive.subscribe(res => {
       $('.song-list').removeClass('active');
       $('.song-list').eq(res).addClass('active');
      });
   }
 
-  removeFromPayload(id:any) {
-    this.write.deleteFromList.next(id);
+  removeFromPayload(musicID:number,playlistID:number) {
+    this.write.deleteFromList.next({musicID,playlistID});
   }
   playlistRemove(id:any,div:HTMLElement) {
     let playlist = this.playlistID;
@@ -78,6 +84,7 @@ export class PlaylistComponent implements OnInit {
     }); 
     this.http.post(`http://127.0.0.1:8000/api/playlist/add?playlistID=${playlist}&musicID=${id}`,{},{headers: headers}).subscribe((res)=>{
       div.remove();
+      this.playlistMusicCount = this.playlistMusicCount - 1;
     });
   };
 
@@ -94,7 +101,7 @@ export class PlaylistComponent implements OnInit {
     }
     this.route.params.subscribe(params => {  
       this.id = params['id'];
-      if(!isNaN(this.id)) {
+      if(!isNaN(this.id) && this.id > 0) {
         if( this.id == this.jsonStatus.id) {
           this.getActiveList()
         }
@@ -111,6 +118,7 @@ export class PlaylistComponent implements OnInit {
           this.playlistData = playlist[0];
           console.log(this.playlistID);
           this.playlistMusicCount = this.playlistData.musics.length;
+          this.playlistDisplayImg = this.playlistData.musics[0].img ?? '';
           this.playlistData.musics.forEach((element:any) => {
               console.log(element);
               let chunk = [element.src,element.name,element.band,element.img,element.id]
@@ -119,7 +127,10 @@ export class PlaylistComponent implements OnInit {
           });
       });
 
+      } else if(this.id == 0){
+
       } else {
+        alert(this.id);
         this.router.navigateByUrl('notfound');
       }
     });

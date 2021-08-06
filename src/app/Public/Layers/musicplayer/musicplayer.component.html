@@ -1,4 +1,4 @@
-<div class="musicPlayer w-100 position-fixed d-grid grid-custom container-fluid ">
+<div class="musicPlayer w-100 position-fixed d-grid grid-custom container-fluid" [ngClass]="{'d-none': (payload.length == 0)}" >
     <div class="controllers d-flex align-items-center justify-content-around">
     <ion-icon name="arrow-back" class="color-wh fs-12 fs-18" id="prev" (click)="prev()"></ion-icon>
     <ion-icon name="play" class="color-wh fs-23" id="play" (click)="play()" *ngIf="!loader && !playTarget"></ion-icon>
