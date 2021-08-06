@@ -24,10 +24,6 @@ import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
-// function userConfig(user: UserConfigService) {
-//   // do the async tasks at here
-//   return () => user.snipToken()
-// }
 
 @NgModule({
   declarations: [
@@ -58,13 +54,7 @@ import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
     FormsModule
   ],
   providers: [
-    // UserConfigService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: userConfig,
-    //   multi: true,
-    //   deps: [UserConfigService]
-    // }
+    
   ],
   bootstrap: [AppComponent]
 })

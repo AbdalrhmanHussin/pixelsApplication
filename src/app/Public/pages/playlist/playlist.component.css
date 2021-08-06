@@ -6,6 +6,17 @@
     
 }
 
+.playlist .btn-area {
+    width: 184px;
+}
+
+.playlist .btn-area .btn {
+    color: #fff;
+    font-size: 12px;
+    border-radius: 20px;
+    width: 100px;
+    margin: 10px;
+}
 .playlist .playlist-poster {
     width: 283px;
     height: 342px;
@@ -22,7 +33,7 @@
 
 .playlist .music-info button {
     font-size: 12px;
-    width: 100px;
+    width: 137px;
     border-radius: 20px;
     background: #fff;
     border: navajowhite;
@@ -41,6 +52,11 @@
     display: grid !important;
     grid-template-columns: 5% 15% 70% 10%;
 }
+
+.playlist .song-list.active {
+    background: #121212 !important;
+}
+
 .playlist .song-list:not(:last-child) {
     background-color: #1a1a1a;
 }

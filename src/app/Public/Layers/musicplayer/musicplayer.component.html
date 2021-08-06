@@ -32,10 +32,12 @@
                 <div class="bar" id="volBall" (mouseenter)="volume($event)" [style.width]="volwidth"></div>
                 <div class="ball  position-absolute" id="ballVl" [style.left]="volwidth"></div>
             </div>
-            <div><i [ngClass]="isfav ? 'fas' : 'far'" class="fa-heart" style="color: white;" (click)='toggelfavicon()'></i></div>
       </div>
    </div>
-   <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn">
-       <ion-icon name="apps-outline"></ion-icon>
-   </div>
+   <Div class="d-flex align-items-center">
+    <div><i *ngIf=' payload.length!==0' [ngClass]="isLikeProps? 'fas' : 'far'" class="fa-heart" style="color: white;" (click)='toggelfavicon()'></i></div>
+    <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn">
+        <ion-icon name="apps-outline"></ion-icon>
+    </div>
+   </Div>
 </div>

@@ -7,8 +7,10 @@ import { playlistData } from '../_model/playlist-data';
 @Injectable({
   providedIn: 'root'
 })
-export class WriteService {
-  
-  public playlist: BehaviorSubject<any>   = new BehaviorSubject<any>(null);
+export class WriteService { 
+  public playlist: BehaviorSubject<any>          = new BehaviorSubject<any>(null);
+  public playCounterActive: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public deleteFromList: BehaviorSubject<any>    = new BehaviorSubject<any>(null);
+
   constructor(private http:HttpClient) { }
 }

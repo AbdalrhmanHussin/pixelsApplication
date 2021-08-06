@@ -1,11 +1,9 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  ReadConfigService
-} from 'src/app/Services/read-config.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { LikeService } from 'src/app/Services/like.service';
+import { ReadConfigService } from 'src/app/Services/read-config.service';
 import { WriteService } from 'src/app/Services/write.service';
+
 
 @Component({
   selector: 'app-musicplayer',
@@ -15,48 +13,60 @@ import { WriteService } from 'src/app/Services/write.service';
 export class MusicplayerComponent implements OnInit {
 
 
-  constructor(private read: ReadConfigService,private write: WriteService) {
+  constructor(
+    private read:ReadConfigService,
+    private likeService: LikeService,
+    private write:WriteService,
+    private router:Router,
+    private activeRouter:ActivatedRoute) {
+    
+   }
 
-  }
-  path: any = 'https://drive.google.com/uc?export=download&id=';
-  music = new Audio();
-  interval: any;
-  ps: any;
-  perc: any;
-  prop: boolean = false;
-  playCounter: number = 0;
-  playTarget: boolean = false;
-  time: string = '00:00';
-  curr: string = '00:00';
-  loader: boolean = false;
-  playImg: string = '';
-  songTitle: string = '';
-  band: string = '';
-  trigger: boolean = false;
-  vol: boolean = false;
-  scope: any;
-  isfav: boolean = false;
-  private currentMusic: any = '';
-  // 0 src.....
-  // 1 Song name
-  // 2 team name 
-  // 3 song src
-  payload: any[] = [];
-  //progress bar control variable
-  barwidth: any = 0;
-  //volume bar control variable
-  volwidth: any = 50;
-  duration: string = '';
-  playlist = 'none';
-  playlistLocker = 0;
-  shuffleLocker  = 0;
-  playlistColor = true;
-  shuffleColor  = true;
+   path: any = 'https://drive.google.com/uc?export=download&id=';
+   music = new Audio();
+   interval: any;
+   ps: any;
+   perc: any;
+   prop: boolean = false;
+   playCounter: number = 0;
+   playTarget: boolean = false;
+   time: string = '00:00';
+   curr: string = '00:00';
+   loader: boolean = false;
+   playImg: string = '';
+   songTitle: string = '';
+   band: string = '';
+   trigger: boolean = false;
+   vol: boolean = false;
+   scope: any;
+   isfav: boolean = false;
+   private currentMusic: any = '';
+   // 0 src.....
+   // 1 Song name
+   // 2 team name 
+   // 3 song src
+   payload: any[] = [];
+   //progress bar control variable
+   barwidth: any = 0;
+   //volume bar control variable
+   volwidth: any = 50;
+   duration: string = '';
+   playlist = 'none';
+   playlistLocker = 0;
+   shuffleLocker  = 0;
+   playlistColor = true;
+   shuffleColor  = true;
+   isLikeProps :boolean=false;
+   jsonStatus = JSON.parse(localStorage.getItem('playingType') || '{}' ) ?? '' ;
+   oldActive:any;
 
-  //load the song with out play it ( inject it into the player ) 
+  
   load() {
-    this.loader = true;
+    this.isLike();
+    this.checkPlayCounter();
+    this.loader=true;
     this.music.src = this.path + this.payload[this.playCounter][0];
+    this.currentMusic = this.path + this.payload[this.playCounter][0];
     this.playImg = this.payload[this.playCounter][3];
     this.songTitle = this.payload[this.playCounter][2];
     this.band = this.payload[this.playCounter][1];
@@ -90,7 +100,6 @@ export class MusicplayerComponent implements OnInit {
 
   //play and pause
   play() {
-
     if (this.music.src == "") {
       this.load();
     }
@@ -180,18 +189,35 @@ export class MusicplayerComponent implements OnInit {
   /*rania start*/
 
   ngOnInit(): void {
-   
+    this.write.deleteFromList.subscribe((data) => {
+      if(data !== null) {
+        this.activeRouter.snapshot.params['id'];
+        console.log(this.jsonStatus.id , this.activeRouter.snapshot.params['id']);
+        if(this.jsonStatus.id == this.activeRouter.snapshot.params['id'])  {
+           this.payload.splice(data,1);
+           console.log(this.payload);
+        }
+      }
+    })
+
     this.write.playlist.subscribe((data) => {
-       if(data !== null) {
-           this.payload = data;
-           console.log(this.payload,data)
-           this.playCounter = 0;
-           this.ready(this.playCounter);
-       }
-    });
-    this.read.musictrack.subscribe((data) => {
-      if (data) {
-        if (this.currentMusic == data[0]) {
+      if(data !== null) {
+          this.payload = [];
+          this.payload = data.playlist;
+          this.playCounter = data.playCounter;
+          (this.playCounter == this.oldActive) ? this.play() : this.ready(this.playCounter);
+          this.oldActive = this.playCounter;
+          console.log(this.oldActive,this.playCounter)
+      }
+   });
+  
+    this.read.musictrack.subscribe((data)=>{
+      if(data){
+        if(localStorage.getItem('playingType')) {
+            localStorage.removeItem('playingType');
+            this.payload = [];
+        } 
+        if(this.currentMusic==data[0]){
           this.play();
         } else {
           this.playCounter = this.payload.length;
@@ -200,8 +226,6 @@ export class MusicplayerComponent implements OnInit {
         }
         this.currentMusic = data[0];
       }
-
-
     });
     /*rania end*/
     this.music.volume = 0.5;
@@ -227,11 +251,11 @@ export class MusicplayerComponent implements OnInit {
       this.drag(event);
       this.volume(event);
     });
+
     this.music.addEventListener('ended', (): void => {
        if(this.shuffleLocker == 1) {
           this.playCounter = Math.floor(Math.random() * this.payload.length);
           console.log('counter:'+this.playCounter);
-
           this.ready(this.playCounter);
        } else {
         if(this.playlistLocker == 0) {
@@ -242,10 +266,28 @@ export class MusicplayerComponent implements OnInit {
             this.play();
         }
        }
-    })
+    });
+    
+
+  }
+  toggelfavicon(): void {    
+    this.likeService.toggleLike(this.payload[this.playCounter][4])
+    .subscribe((res: { isLike: boolean }) => {
+      this.isLikeProps  = res.isLike;
+      this.likeService.likes.next({action: true});
+    });
+  }
+  
+  isLike(): void {
+    this.likeService.isLike(this.payload[this.playCounter][4])
+      .subscribe((res: { isLike: boolean }) => {
+        this.isLikeProps  = res.isLike;
+        console.log(res);
+      })
   }
 
-  toggelfavicon() {
-    this.isfav = !this.isfav;
+  checkPlayCounter() {
+    this.write.playCounterActive.next(this.playCounter);
   }
+
 }

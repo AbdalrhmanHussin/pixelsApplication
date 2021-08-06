@@ -35,6 +35,10 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent
       },
+      { 
+        path: 'playlist/:id', 
+        component: PlaylistComponent
+      },
       {
         path: '',
         redirectTo: '/home',
@@ -44,8 +48,6 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: SignupComponent },
-  { path: 'playlist/:id', component: PlaylistComponent },
-  { path: 'playlist', component: PlaylistComponent },
   { path: '**', component: NotFoundComponent  }
 ];
 
