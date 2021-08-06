@@ -5,6 +5,7 @@ import { HomeComponent } from './Public/pages/home/home.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
 import { PagesComponent } from './Public/pages/pages.component';
+import { PlayingComponent } from './Public/pages/playing/playing.component';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { LoginComponent } from './Public/users/login/login.component';
@@ -40,8 +41,8 @@ const routes: Routes = [
         component: PlaylistComponent
       },
       { 
-        path: 'playlist', 
-        component: PlaylistComponent
+        path: 'playing', 
+        component: PlayingComponent
       },
       {
         path: '',

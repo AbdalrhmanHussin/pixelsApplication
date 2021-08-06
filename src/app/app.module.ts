@@ -19,11 +19,11 @@ import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.compon
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
 import * as $ from 'jquery';
-import { UserConfigService } from './Services/user-config.service';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
+import { PlayingComponent } from './Public/pages/playing/playing.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
     NotFoundComponent,
     ProfileComponent,
     OverlayComponent,
+    PlayingComponent,
   ],
   imports: [
     BrowserModule,

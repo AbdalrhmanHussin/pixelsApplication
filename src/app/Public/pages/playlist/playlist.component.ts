@@ -12,6 +12,7 @@ import {
 import { playlist } from 'src/app/_model/playlist';
 import { WriteService } from 'src/app/Services/write.service';
 import { filter } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,9 @@ import { filter } from 'rxjs/operators';
 })
 export class PlaylistComponent implements OnInit {
 
-  constructor(public read:ReadConfigService,private route:ActivatedRoute,private router:Router,private activeRouter:ActivatedRoute,private http:HttpClient,public write:WriteService) {}
+  constructor(public read:ReadConfigService,private route:ActivatedRoute,private router:Router,private activeRouter:ActivatedRoute,private http:HttpClient,public write:WriteService) {
+    
+  }
   
   selectedId: number = 0;
   
@@ -65,17 +68,29 @@ export class PlaylistComponent implements OnInit {
   getActiveList() {
     this.write.playlistDisplayImg.subscribe((res) => {
        this.playlistDisplayImg = res;
-    })
-    this.write.playCounterActive.subscribe(res => {
-      $('.song-list').removeClass('active');
-      $('.song-list').eq(res).addClass('active');
-     });
+    });
+  }
+
+  playlistFormate(playlistInsert:any) {
+    let playArray:any = [];
+    let playlist:any  = playlistInsert[0];
+    this.playlistID   = playlist[0].id;
+    this.playlistData = playlist[0];
+    this.playlistMusicCount = this.playlistData.musics.length;
+    this.playlistDisplayImg = this.playlistData.musics[0].img ?? '';
+    this.playlistData.musics.forEach((element:any) => {
+        let chunk = [element.src,element.name,element.band,element.img,element.id]
+        console.log(chunk);
+        playArray.push(chunk);
+        this.playlistArray = playArray;
+    });
   }
 
   removeFromPayload(musicID:number,playlistID:number) {
     this.write.deleteFromList.next({musicID,playlistID});
   }
-  playlistRemove(id:any,div:HTMLElement) {
+
+  removeRelationMusicPlaylist(id:any,div:HTMLElement) {
     let playlist = this.playlistID;
     let sanctum  = localStorage.getItem('User');
     let headers  = new HttpHeaders({
@@ -89,6 +104,10 @@ export class PlaylistComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.write.playlistPayload.subscribe((res)=>{
+      console.log(res);
+    })
+    
     //init the page in playlist
     if(this.playlistPage) {
       $('.tb-page').css({
@@ -103,7 +122,6 @@ export class PlaylistComponent implements OnInit {
       this.id = params['id'];
       if(!isNaN(this.id) && this.id > 0) {
         if( this.id == this.jsonStatus.id) {
-          this.getActiveList()
         }
         this.router.events.pipe(
           filter((event) => event instanceof NavigationEnd)
@@ -112,23 +130,15 @@ export class PlaylistComponent implements OnInit {
         })
 
         this.read.getPlaylistMusics(this.id).subscribe(res => {
-          let playArray:any = [];
-          let playlist:any  = res[0];
-          this.playlistID   = playlist[0].id;
-          this.playlistData = playlist[0];
-          console.log(this.playlistID);
-          this.playlistMusicCount = this.playlistData.musics.length;
-          this.playlistDisplayImg = this.playlistData.musics[0].img ?? '';
-          this.playlistData.musics.forEach((element:any) => {
-              console.log(element);
-              let chunk = [element.src,element.name,element.band,element.img,element.id]
-              playArray.push(chunk);
-              this.playlistArray = playArray;
-          });
-      });
+          this.playlistFormate(res); 
+        });
 
       } else if(this.id == 0){
-
+        this.write.playlistPayload.subscribe((res)=>{
+          this.playlistData = res;
+          this.playlistMusicCount = this.playlistData.length;
+          console.log(res);
+        });
       } else {
         alert(this.id);
         this.router.navigateByUrl('notfound');

@@ -11,7 +11,7 @@
             <img src="{{ playlistDisplayImg }}" class="w-100 h-100 playlistPortera">
           </div>
           <div class="music-info ml-4 mt-3" *ngIf="(playlistMusicCount > 0) true : false;">
-            <h2>{{ playlistData.name }}</h2>
+            <h2 *ngIf="playlistData.name.length > 0">{{ playlistData.name }}</h2>
             <p>Created At: {{ playlistData.created_at | date:'mediumDate'}}</p>
             <p>Number Of Songs: {{ playlistMusicCount  }}</p>
             <button class="btn" (click)="getPlaylistAction()">Play All</button>
@@ -34,7 +34,7 @@
             <div class="ml-5 pl-4 rel">
               <p>Release Date: {{ playlistData.created_at | date:'mediumDate'}}</p>
             </div>
-            <button class="ml-auto mr-3" (click)="playlistRemove(item.id,song)" (click)="removeFromPayload(indexEle,playlistData.id)">
+            <button class="ml-auto mr-3" (click)="removeRelationMusicPlaylist(item.id,song)" (click)="removeFromPayload(indexEle,playlistData.id)">
               Remove
             </button>
           </Div>

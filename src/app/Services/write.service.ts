@@ -12,7 +12,11 @@ export class WriteService {
   public playCounterActive: BehaviorSubject<any>  = new BehaviorSubject<any>(null);
   public deleteFromList: BehaviorSubject<any>     = new BehaviorSubject<any>(null);
   public playlistDisplayImg: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  public payloadExport:BehaviorSubject<any>       = new BehaviorSubject<any>(null)
+  public playlistPayload: BehaviorSubject<any>    = new BehaviorSubject<any>(null);
+  public loadedMusic: BehaviorSubject<any>        = new BehaviorSubject<any>(null);
+
 
   constructor(private http:HttpClient) { }
+
+
 }

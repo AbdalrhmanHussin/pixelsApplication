@@ -71,6 +71,7 @@ export class MusicplayerComponent implements OnInit {
     this.isLike();
     this.checkPlayCounter();
     this.playlistImgLooping(this.playImg);
+    this.payLoadExport(this.payload);
     this.music.addEventListener('loadeddata', (): void => {
       this.loader = false;
       this.time = this.timeSet(this.music.duration);
@@ -191,10 +192,16 @@ export class MusicplayerComponent implements OnInit {
   playlistImgLooping(img:string) {
     this.write.playlistDisplayImg.next(img);
   }
+
+  payLoadExport(payload:any) {
+    console.log(payload);
+    this.write.playlistPayload.next(payload);
+  }
+
+  loadedMusic(activeMusic:any) {}
   /*rania start*/
 
   ngOnInit(): void {
-    this.write.payloadExport.next(this.payload);
     this.write.deleteFromList.subscribe((data) => {
       if(data !== null) {
          if(data.playlistID == this.playingPlaylist.id) {
@@ -202,7 +209,6 @@ export class MusicplayerComponent implements OnInit {
          } 
       }
     })
-
     this.write.playlist.subscribe((data) => {
       if(data !== null) {
           this.payload = [];
