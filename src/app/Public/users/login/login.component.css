@@ -1,73 +1,70 @@
-/* Login page main  */
-.login-wrapper {
-    min-height: 100vh !important;
-    height: 100%;
-    background-color: var(--white);
+.container-login100 {
+    width: 100%;  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+.wrap-login100 {
+  width: 500px;
+  height: 500px;
+  background-color: #1a1f24;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
 }
 
-.login-wrapper .logo {
-    border-color: #ccc !important;
+.login100-form-title {
+  width: 100%;
+  height: 180px;
+  opacity: 0.6;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 70px 15px 74px 15px;
 }
 
-.login-wrapper .logo img{
-    width: 142px;
+.login100-form-title-1 {
+  font-family: Poppins-Bold;
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
 }
 
-.login-wrapper .auth h3,
-.login-wrapper .mail h3 {
+.input-group{
+    margin-top: 15px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid white;
+
+}
+.input-group .form-control{
+    border: none;
+    outline: none ;
+    box-shadow: none;
+    background: transparent !important;
+    padding: 10px;
+    color: white;
     font-size: 14px;
-    font-weight: bold;
-}
-/* Auth */
-.login-wrapper .auth button {
-    border: navajowhite;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    min-width: 400px;
-    text-transform: uppercase;
+    width: 375px;
 }
 
-.login-wrapper .auth button.fb {
-    background: #3a61b3;
-}
-
-.login-wrapper .auth button.go {
-    background: var(--black);
-}
-
-.login-wrapper .auth button p {
-    font-size: 12px;
-    font-weight: bold;
-    padding: 0 10px;
-}
-
-/* Mail */
-
-.mail {
-    min-width: 400px;
-}
-
-.mail label {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.mail input {
-    padding: 5px;
-    font-size: 12px;
-}
-
-.mail input[type = 'submit'] {
-    width: 100%;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.mail .tools .forget,
-.mail .tools .signup {
-    color: var(--gray);
-    font-size: 12px;
-    font-weight: bold;
+.btnlog{
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+    color: var(--black) !important;
+    border: 0;
+   outline: none;
+   border-radius: 30px;
 }

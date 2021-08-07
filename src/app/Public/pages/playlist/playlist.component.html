@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
+<ul class="navbar-nav flex-row Taber color-wh fs-13 mb-5">
+  <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/home">Discover</a></li>
+  <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/browse">Browse</a></li>
+  <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/newrel">NewRelease</a></li>
+  <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']"  routerLink="/charts">charts</a></li>
+  <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/playlist">playlist</a></li>
+</ul>
 <div class="tb-container d-flex">
   <app-sidenav></app-sidenav>
-  <div class="playlist mt-0">
+  <div class="playlist mt-5">
     <div class="playlist-header">
       <div class="container">
         <Div class="row mt-5">

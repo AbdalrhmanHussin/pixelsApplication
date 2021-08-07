@@ -43,7 +43,7 @@ const routes: Routes = [
   ]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: SignupComponent },
+  { path: 'Register', component: SignupComponent },
   { path: 'playlist/:id', component: PlaylistComponent },
   { path: 'playlist', component: PlaylistComponent },
   { path: '**', component: NotFoundComponent  }

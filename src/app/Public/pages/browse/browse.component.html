@@ -1,9 +1,9 @@
 <ul class="navbar-nav flex-row Taber color-wh fs-13 mb-5">
-    <li data="NewRelease" class="pr-3">NewRelease</li>
-    <li data="Popular" class="pr-3">Popular</li>
-    <li data="Music"   class="pr-3">Music</li>
-    <li data="Album"   class="pr-3">Album</li>
-    <li data="playlist" class="pr-3">playlist</li>
+    <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/home">Discover</a></li>
+    <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/browse">Browse</a></li>
+    <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/newrel">NewRelease</a></li>
+    <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']"  routerLink="/charts">charts</a></li>
+    <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/playlist">playlist</a></li>
 </ul>
 <section class="category">
     <h3 class="fs-17 fw-500 color-wh  pb-2">Popular Musics</h3>
