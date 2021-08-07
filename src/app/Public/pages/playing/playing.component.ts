@@ -36,25 +36,24 @@ export class PlayingComponent implements OnInit {
       'width': '100%',
       'margin-top': 0
     });
+
     this.write.playlistPayload.subscribe((res)=>{
-      console.log(res);
       this.musicInRow = res;
       this.playListCount = this.musicInRow.length;
-      this.playJson = [];
+      this.playJson = []; // -> to prevent double push and repeting the items
       this.musicInRow.forEach((element:any) => {
          let chunk = {
-            'src': element[0],
+            'src' : element[0],
             'name': element[1],
             'band': element[2],
             'img' : element[3],
             'id'  : element[4]
          }
-         console.log(this.playJson);
 
          this.playJson.push(chunk);
          
       });
-      console.log(this.musicInRow);
+ 
     });
     this.write.loadedMusic.subscribe((res)=>{
        this.name = res[1];

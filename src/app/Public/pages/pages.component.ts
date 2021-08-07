@@ -24,12 +24,12 @@ export class PagesComponent implements OnInit {
                 items:2
             },
             576: {
-                items:3
+                items:2
             },
             992:{
                 items:3
             },
-            1000:{
+            1300:{
                 items:4
             }
         }
@@ -49,7 +49,7 @@ export class PagesComponent implements OnInit {
                 items:2
             },
             576: {
-                items:3
+                items:2
             },
             992:{
                 items:3

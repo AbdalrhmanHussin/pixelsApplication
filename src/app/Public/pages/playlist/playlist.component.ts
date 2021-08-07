@@ -120,6 +120,7 @@ export class PlaylistComponent implements OnInit {
     }
     this.route.params.subscribe(params => {  
       this.id = params['id'];
+      console.log(this.id);
       if(!isNaN(this.id) && this.id > 0) {
         if( this.id == this.jsonStatus.id) {
         }
