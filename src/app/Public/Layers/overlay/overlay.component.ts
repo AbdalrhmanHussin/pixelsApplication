@@ -95,7 +95,7 @@ export class OverlayComponent implements OnInit {
    this.playlistFetch();
     //display overlay
 
-    $('.category').on('click', '.menu', function () {
+    $('.tb-page').on('click', '.menu', function () {
       let id:any = $(this).attr('id');
       $(".overlay").css('display', 'flex');
       setTimeout(() => {

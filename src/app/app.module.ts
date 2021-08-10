@@ -24,6 +24,7 @@ import { NotFoundComponent } from './Public/pages/not-found/not-found.component'
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
 import { PlayingComponent } from './Public/pages/playing/playing.component';
+import { AllComponent } from './all/all.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PlayingComponent } from './Public/pages/playing/playing.component';
     ProfileComponent,
     OverlayComponent,
     PlayingComponent,
+    AllComponent,
   ],
   imports: [
     BrowserModule,

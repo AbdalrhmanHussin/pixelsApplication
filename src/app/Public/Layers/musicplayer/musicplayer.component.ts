@@ -17,9 +17,7 @@ export class MusicplayerComponent implements OnInit {
   constructor(
     private read:ReadConfigService,
     private likeService: LikeService,
-    private write:WriteService,
-    private router:Router,
-    private activeRouter:ActivatedRoute) {
+    private write:WriteService) {
     
    }
 
@@ -60,6 +58,7 @@ export class MusicplayerComponent implements OnInit {
    isLikeProps :boolean=false;
    playingPlaylist = JSON.parse(localStorage.getItem('playingType') || '{}' ) ?? '' ;
    oldActive:any;
+   isPlaying:any;
 
   
   load() {
@@ -73,6 +72,11 @@ export class MusicplayerComponent implements OnInit {
     this.checkPlayCounter();
     this.playlistImgLooping(this.playImg);
     this.payLoadExport(this.payload);
+    this.loadedMusic(this.payload[this.playCounter]);
+    console.log(this.payload);
+    this.write.playingMode.subscribe(res =>{
+       console.log(res);
+    });
     this.music.addEventListener('loadeddata', (): void => {
       this.loader = false;
       this.time = this.timeSet(this.music.duration);
@@ -109,10 +113,12 @@ export class MusicplayerComponent implements OnInit {
         this.playTarget = true;
         this.music.play();
         this.int(true);
+        this.isPlaying = $('.play i.fa-play');
     } else {
         this.playTarget = false;
         this.music.pause();
         this.int(false);
+        $('.play i').addClass('fa-play').removeClass('fa-pause');
     }
   }
 
@@ -201,7 +207,9 @@ export class MusicplayerComponent implements OnInit {
     this.write.playlistPayload.next(payload);
   }
 
-  loadedMusic(activeMusic:any) {}
+  loadedMusic(activeMusic:any) {
+     this.write.loadedMusic.next(activeMusic);
+  }
   
   toggelfavicon(): void {    
     this.likeService.toggleLike(this.payload[this.playCounter][4])
@@ -248,10 +256,7 @@ export class MusicplayerComponent implements OnInit {
    });
     this.read.musictrack.subscribe((data)=>{
       if(data){
-        if(localStorage.getItem('playingType')) {
-            localStorage.removeItem('playingType');
-            this.payload = [];
-        } 
+        this.write.playingMode.next({mode:'nowplaying',playlist:null});
         if(this.currentMusic==data[0]){
           this.play();
         } else {
@@ -267,9 +272,11 @@ export class MusicplayerComponent implements OnInit {
     ball.addEventListener('mousedown', (): void => {
       this.trigger = true;
     });
+
     ballVl.addEventListener('mousedown', (): void => {
       this.vol = true;
     });
+
     document.addEventListener('mouseup', (): void => {
       if (this.trigger) {
           this.int(true);
@@ -290,31 +297,18 @@ export class MusicplayerComponent implements OnInit {
       $('.play i').addClass('fa-play').removeClass('fa-pause');
       if(this.shuffleLocker == 1) {
           this.playCounter = Math.floor(Math.random() * this.payload.length);
+          console.log('Random number'+this.playCounter);
           this.ready(this.playCounter);
       } else {
-         if(this.playCounter == this.payload.length - 1) {
-            if (this.playlistLocker == 0) {
-                this.reset();
-                this.load();
-            } else {
-                this.next();
-            }
-         } else {
-            this.next();
-         }
+        if (this.playlistLocker == 0) {
+          this.reset();
+          this.load();
+        } else {
+          this.next();
+        }
       }
     });
-    
-    $('.tb-page').on('click','.play i',function(this:Element){
-       $(this).toggleClass('fa-play');
-       $(this).toggleClass('fa-pause');
-      // if($(this).hasClass('fa-play')) {
-      //    $(this).removeClass('fa-play').addClass('fa-pause');
-      // } else {
-      //    $(this).addClass('fa-play').removeClass('fa-pause');
-      // }
-    })
-
+  
   }
   
 

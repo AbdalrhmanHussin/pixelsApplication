@@ -14,12 +14,9 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   private limit: number =10;
-  //Popular
-  PopularSlides:any = this.read.Popular;
-  NewSlides:any = this.read.New;
-  alltrackes:Music[] = [];
- //iserror:boolean=false;
-  
+  popular:Music[]    = [];
+  newRelease:Music[] = [];
+  rand:Music[]       = [];
 
   constructor(public owl:PagesComponent,public read:ReadConfigService,public user:UserConfigService) { }
   
@@ -27,34 +24,25 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //init the page to regular form
     $('.tb-page').removeAttr('style');
-    this.read.getalltracks(this.limit).subscribe((musics: Music[]) => {
-         this.alltrackes = musics;
-         setTimeout(() => {
-          this.owl.loadOwl('5rowInit')
-          this.owl.loadOwl('4rowInit')
-        }, 10); 
+    this.read.getalltracks(this.limit,'popular').subscribe((musics: Music[]) => {
+      this.popular = musics;
+      setTimeout(() => {
+        this.owl.loadOwl('4rowInit')
+      }, 100); 
     });
-    
+
+    this.read.getalltracks(this.limit,'release').subscribe((musics: Music[]) => {
+      this.newRelease = musics;
+     
+    });
+    this.read.getalltracks(this.limit,'random').subscribe(async (musics: Music[]) => {
+      this.rand = musics;
+      setTimeout(() => {
+        this.owl.loadOwl('5rowInit');
+      },100);
+      
+    });
+
   }
   
-  gettrackeByID(id:number):void{
-      this.read.gettrackeByID(id).subscribe((res:{message:string,music:Music})=>{
-        if(res.message==='success'){
-          this.read.musictrack.next([
-            res.music.src,
-            res.music.name,
-            res.music.band,
-            res.music.img,
-            res.music.id
-          ]);
-        }
-        console.log(res);
-        
-        
-      }, error => {
-        console.error(error);
-      });
-  }
-
- 
 }

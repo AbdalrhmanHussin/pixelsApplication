@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AllComponent } from './all/all.component';
 import { BrowseComponent } from './Public/pages/browse/browse.component';
 import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { HomeComponent } from './Public/pages/home/home.component';
@@ -22,7 +23,13 @@ const routes: Routes = [
       },
       {
         path: 'browse',
-        component: BrowseComponent
+        component: BrowseComponent,
+        children: [
+          {
+            path: 'browse/all',
+            component: AllComponent
+          }
+        ]
       },
       {
         path: 'newrel',

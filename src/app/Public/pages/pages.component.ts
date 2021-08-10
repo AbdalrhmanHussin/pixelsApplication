@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ReadConfigService } from 'src/app/Services/read-config.service';
+import { Music } from 'src/app/_model/music';
 declare var $: any;
 @Component({
   selector: 'app-pages',
@@ -7,7 +9,7 @@ declare var $: any;
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public read:ReadConfigService) { }
   loadOwl(req:string) {
     if(req == '4rowInit') {
       $(".owl-carousel.fourOwl").owlCarousel({
@@ -38,7 +40,7 @@ export class PagesComponent implements OnInit {
       $(".owl-carousel.fiveOwl").owlCarousel({
         margin:23,
         lazyLoad: true,
-        loop: true,
+        loop: false,
         nav: true,
         dots: false,
         autoplay: false,
@@ -64,8 +66,34 @@ export class PagesComponent implements OnInit {
     });
     }
   }
+  gettrackeByID(id:number):void{
+    this.read.gettrackeByID(id).subscribe((res:{message:string,music:Music})=>{
+      if(res.message==='success'){
+        this.read.musictrack.next([
+          res.music.src,
+          res.music.name,
+          res.music.band,
+          res.music.img,
+          res.music.id
+        ]);
+      }
+      console.log(res);
+      
+      
+    }, error => {
+      console.error(error);
+    });
+  }
   ngOnInit(): void {
-    
+    let playFn = (id:any) => {
+       this.gettrackeByID(id);
+    }
+    $('.tb-page').on('click','.play',function(this:any){
+        let id:any = $(this).attr('id');
+        $('.play').not($(this)).children('i').removeClass('fa-pause').addClass('fa-play')
+        $(this).children('i').toggleClass('fa-play fa-pause');
+        playFn(id);
+    })
   }
 
 
