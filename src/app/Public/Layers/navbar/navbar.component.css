@@ -32,3 +32,21 @@ nav form label {
     top: 21px;
     
 }
+
+.searchResult{
+   min-height: 200px;
+   overflow: auto;
+   padding: 10px 8px;
+   
+   
+}
+.searchResult td{
+    padding: 5px 5px;
+    border-radius: 3px;
+  
+    
+}
+
+.searchResult td:hover{
+    background: #efefef;
+}

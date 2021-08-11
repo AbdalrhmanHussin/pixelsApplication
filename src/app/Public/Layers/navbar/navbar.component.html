@@ -9,13 +9,27 @@
            </div>
         </div>
         <form class=" d-flex justify-content-center align-items-center h-100 position-relative search-form">
-            <input class="form-control fs-12 fw-500" type="search" placeholder="Search...">
+            <input [(ngModel)]="searchQuery"  class="form-control fs-12 fw-500" type="text" placeholder="Search..."  name="search"  (keyup) = "getAllSearch()" (click) ="toggleShow()" >
             <label class="position-absolute color-wh ">
-               <ion-icon name="search-outline"></ion-icon>
+               <ion-icon name="search-outline">ghada</ion-icon>
             </label>
-            <div class="tb-results">
-                
-            </div>
+             <div class="tb-results">
+             </div>
+             <div class="searchResult     w-100  position-absolute top-0 mt-5 flex-start d-flex" *ngIf="isShown" >
+                <table style="color: bisque;  background-color: rgba(0, 0, 0, 0.507); "
+                 class="searchInput" *ngIf="allSearch?.length > 0" >
+                    <thead>
+                        <td>"results for:"</td>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let music  of allSearch" >
+                            <td >{{music.name}}</td>
+                            <td><hr></td>
+                        </tr>
+                    </tbody>
+                </table>   
+             </div>
+
         </form>
         <div class="sign d-flex justify-content-end align-items-center pr-3">
             <p class="fs-14 fw-500  mb-0 d-flex justify-content-end align-items-center color-gr mr-3"><ion-icon name="search-outline"></ion-icon></p>
