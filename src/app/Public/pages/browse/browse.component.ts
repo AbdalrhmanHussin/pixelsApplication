@@ -6,7 +6,7 @@ import { PagesComponent } from '../pages.component';
 @Component({
   selector: 'app-browse',
   templateUrl: './browse.component.html',
-  styleUrls: ['./browse.component.css']
+  styleUrls: ['../page.component.css']
 })
 export class BrowseComponent implements OnInit {
  

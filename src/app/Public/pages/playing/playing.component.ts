@@ -8,6 +8,7 @@ import { WriteService } from 'src/app/Services/write.service';
   selector: 'app-playing',
   templateUrl: './playing.component.html',
   styleUrls: ['./playing.component.css']
+
 })
 export class PlayingComponent implements OnInit {
   getPlaylistAction(index:number = 0) {

@@ -42,6 +42,10 @@ export class PlaylistComponent implements OnInit {
   playlistDisplayImg:any = "../../../../assets/images/noimg.jfif";
 
   activeItem:any;
+
+  activePlaylist = JSON.parse(localStorage.getItem('playingType') || '{}').id;
+
+  activeSong:any;
   
   //load playlist 
   getPlaylistAction(index:number = 0) {
@@ -52,7 +56,6 @@ export class PlaylistComponent implements OnInit {
     }
 
     localStorage.setItem('playingType',JSON.stringify(data));
-
     this.transferePlaylist(this.playlistArray,index);
     this.getActiveList();
   }
@@ -61,7 +64,7 @@ export class PlaylistComponent implements OnInit {
   transferePlaylist(playlist:any,playCounter:number = 0) {
     let playing = this.playlistData.id;
     this.write.playingMode.next({mode:'playlist',playlist:playing});
-    this.write.playlist.next({playlist,playCounter});
+    this.write.playlist.next({playing,playlist,playCounter});
   }
   
   //get the image and the name of active song
@@ -84,6 +87,7 @@ export class PlaylistComponent implements OnInit {
         playArray.push(chunk);
         this.playlistArray = playArray;
     });
+    // this.addActiveForce( this.activeSong);
   }
 
   //delete item from payload
@@ -105,9 +109,18 @@ export class PlaylistComponent implements OnInit {
     });
   };
 
+  addActiveForce(num:number) {
+     console.log(this.id , this.activePlaylist);
+     if(this.id == this.activePlaylist) {
+      $('.song-list.active').removeClass('active');
+      $('.song-list').eq(num).addClass('active');
+     }
+  }
+
   ngOnInit(): void {
-    this.write.playlistPayload.subscribe((res)=>{
-      console.log(res);
+    this.write.playCounterActive.subscribe((res)=>{
+      this.activeSong = res;
+      this.addActiveForce(res); 
     })
     
     //init the page in playlist
@@ -132,7 +145,13 @@ export class PlaylistComponent implements OnInit {
         })
 
         this.read.getPlaylistMusics(this.id).subscribe(res => {
-          this.playlistFormate(res); 
+          let data:any = res[0];
+          console.log(data[0]);
+          if(data[0] == undefined) {
+            this.router.navigateByUrl('notfound');
+          } else {
+            this.playlistFormate(res); 
+          }
         });
 
       } else if(this.id == 0){

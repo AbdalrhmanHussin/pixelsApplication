@@ -9,7 +9,7 @@ declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['../pages.css']
 })
 export class HomeComponent implements OnInit {
 
@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //init the page to regular form
     $('.tb-page').removeAttr('style');
+
+    //Render Sorting of musics: Popular
     this.read.getalltracks(this.limit,'popular').subscribe((musics: Music[]) => {
       this.popular = musics;
       setTimeout(() => {
@@ -31,10 +33,12 @@ export class HomeComponent implements OnInit {
       }, 100); 
     });
 
+    //Render Sorting of musics: New Release
     this.read.getalltracks(this.limit,'release').subscribe((musics: Music[]) => {
       this.newRelease = musics;
-     
     });
+
+    //Render Sorting of musics: Random
     this.read.getalltracks(this.limit,'random').subscribe(async (musics: Music[]) => {
       this.rand = musics;
       setTimeout(() => {

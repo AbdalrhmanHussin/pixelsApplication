@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AllComponent } from './all/all.component';
 import { BrowseComponent } from './Public/pages/browse/browse.component';
-import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { HomeComponent } from './Public/pages/home/home.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
@@ -32,12 +31,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'newrel',
+        path: 'single',
         component: NewreleaseComponent
       },
       {
-        path: 'charts',
-        component: ChartsComponent
+        path: 'newrel',
+        component: NewreleaseComponent
       },
       {
         path: 'profile',

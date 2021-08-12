@@ -1,7 +1,7 @@
 
 <section class="category">
-  <h3 class="fs-17 fw-500 color-wh  pb-2">Fav Musics</h3>
-  <div class="owl-carousel fourOwl owl-theme">
+  <h3 class="fs-17 fw-500 color-wh  pb-2">My Likes</h3>
+  <div class="owl-carousel fourOwl owl-theme" #owlElement>
     <div class="tb-music-box-md music" *ngFor="let alltracke of likes">
       <div class="tb-music-box-md music">
         <img [src]="alltracke.img">
@@ -28,44 +28,15 @@
 </section>
   <!-- section2 playlist -->
   <section class="category mt-5">
-    <h3 class="fs-17 fw-500 color-wh  pb-2">PlayLists</h3>
-    <div class="owl-carousel fiveOwl">
-      <div class="tb-music-box-sm secBrowse1  d-grid" *ngFor="let alltracke of alltrackes">
-        <img src="http://music.flatfull.com/waveme/wp-content/uploads/sites/2/2020/09/Artboard-15.png">
-        <div class="overlay">
-          <ion-icon name="ellipsis-vertical-outline" class="icon1"></ion-icon>
-          <ion-icon name="caret-forward-circle-outline" class="icon"></ion-icon>
-        </div>
-        <div class="musicInfo">
-          <h3 class="fs-12 fw-400 pl-2 pt-3 color-wh">Sound Waveform</h3>
-          <h4 class="fs-12 fw-400 pl-2 pb-3 color-wh color-sv">Heysound</h4>
-        </div>
+    <h3 class="fs-17 fw-500 color-wh  pb-2">My Playlists</h3>
+    <div class="owl-carousel fiveOwl" >
+      <div class="tb-music-box-sm-round music d-grid rgrid-2-1 music justify-content-center align-items-center" *ngFor="let item of playlistKeys">
+          <a routerLink="/playlist/{{ playlist[item].id }}" class="w-100 top-0 position-fixed h-100"></a>
+          <img src="{{ playlist[item].musics[0].img }}">
+          <div class="musicInfo text-center">
+              <h3 class="fs-12 fw-400 pl-2 pt-2 color-wh">{{ playlist[item].name }}</h3>
+          </div>
       </div>
     </div>
-  </section>
-  <section class="category mt-5">
-    <div class="containBox mt-4 ">
-      <div class="containContainerBox pt-4">
-        <h3 class="text-center mt-5 pt-5">Discover songs you’ll love</h3>
-        <p class="text-center  pt-3 fs-13">Find the most popular artists and listen their music. Create your own<br>
-          playlist when listening to them.</p>
-        <button class="btnContainBox mt-3 fs-13">Explore the new music</button>
-      </div>
-    </div>
-  </section>
-  <section class="category  mt-5">
-    <h3 class="fs-17 fw-500 color-wh  pb-2">New Release</h3>
-    <div class="owl-carousel fiveOwl">
-      <div class="tb-music-box-sm secBrowse1  d-grid" *ngFor="let alltracke of alltrackes">
-        <img src="http://music.flatfull.com/waveme/wp-content/uploads/sites/2/2020/09/Artboard-15.png">
-        <div class="overlay">
-          <ion-icon name="ellipsis-vertical-outline" class="icon1"></ion-icon>
-          <ion-icon name="caret-forward-circle-outline" class="icon"></ion-icon>
-        </div>
-        <div class="musicInfo">
-          <h3 class="fs-12 fw-400 pl-2 pt-3 color-wh">Sound Waveform</h3>
-          <h4 class="fs-12 fw-400 pl-2 pb-3 color-wh color-sv">Heysound</h4>
-        </div>
-      </div>
-    </div>
-  </section>
+ </section>
+  

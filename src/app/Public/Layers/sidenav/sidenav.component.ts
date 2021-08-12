@@ -32,8 +32,37 @@ export class SidenavComponent implements OnInit {
    })
   }
 
-  ngOnInit(): void {
-     
+  darkMode() {
+   
+  }
+  ngOnInit(): void { 
+    if(localStorage.getItem('mode') == 'light') {
+    document.body.classList.add('light-theme')
+    document.documentElement.style.setProperty('--colorWhite', '#000');
+    document.documentElement.style.setProperty('--black', '#ccc');
+ } else {
+   document.body.classList.remove('light-theme')
+   document.documentElement.style.setProperty('--colorWhite', '#fff');
+   document.documentElement.style.setProperty('--black', '#101316');
+ }   
+    console.log(localStorage.getItem('mode') );
+    let inverted = document.querySelectorAll('img');
+    console.log(inverted);
+  
+    $('.switch').on('change',function(){
+      // console.log(document.body.classList.contains('light-theme'));
+      (document.body.classList.contains('light-theme')) ? document.body.classList.remove('light-theme') : document.body.classList.add('light-theme');
+      let mode = (document.body.classList.contains('light-theme')) ? localStorage.setItem('mode','light') : localStorage.setItem('mode','dark');
+      if(localStorage.getItem('mode') == 'light') {
+        document.body.classList.add('light-theme')
+        document.documentElement.style.setProperty('--colorWhite', '#000');
+        document.documentElement.style.setProperty('--black', '#ccc');
+     } else {
+       document.body.classList.remove('light-theme')
+       document.documentElement.style.setProperty('--colorWhite', '#fff');
+       document.documentElement.style.setProperty('--black', '#101316');
+     }   
+    })
   }
 
 

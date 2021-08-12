@@ -93,7 +93,9 @@ export class PagesComponent implements OnInit {
         $('.play').not($(this)).children('i').removeClass('fa-pause').addClass('fa-play')
         $(this).children('i').toggleClass('fa-play fa-pause');
         playFn(id);
-    })
+    });
+    console.log($('img'));
+   
   }
 
 
