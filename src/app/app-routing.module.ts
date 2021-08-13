@@ -9,6 +9,7 @@ import { PagesComponent } from './Public/pages/pages.component';
 import { PlayingComponent } from './Public/pages/playing/playing.component';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
+import { SinglemusicComponent } from './Public/pages/singlemusic/singlemusic.component';
 import { LoginComponent } from './Public/users/login/login.component';
 import { SignupComponent } from './Public/users/signup/signup.component';
 
@@ -30,6 +31,10 @@ const routes: Routes = [
             component: AllComponent
           }
         ]
+      },
+      {
+        path: 'single/:id',
+        component: SinglemusicComponent
       },
       {
         path: 'newrel',

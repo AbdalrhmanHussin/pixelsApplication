@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
         'password': form.value.password
       }
       this.http.post('http://127.0.0.1:8000/api/login',data).subscribe((res:any)=>{
-           console.log(res.login);
-          if(res.login == 'success') {
+           console.log(res);
+          if(res.message == 'success') {
               localStorage.setItem('User',res.token);
               
               this.router.navigate(['/']);

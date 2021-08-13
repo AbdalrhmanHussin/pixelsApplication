@@ -10,6 +10,7 @@
     --grey: #818383;
     --borderColor: #dee2e617;
     --dark-gray: #202326;
+    --light-black:#101316;
     --transition: .3s linear;
 }
 a,
@@ -165,6 +166,7 @@ body {
 .rgrid-2-1 {
     grid-template-rows: 75% 25%;
 }
+
 /* Navbar */
 nav {
     height: 63px;
@@ -770,5 +772,87 @@ aside ion-icon {
 section.category {
     min-height: 209px;
 }
+
+/*music page */
+.pagemusic{
+    width: 100%;
+    min-height: 284px;
+    position: relative;
+    border-radius: 4px;
+    background-color: var(--light-black);
+    
+}
+.music-img{
+    width: 238px;
+    height: 265px;
+    top: -40px;
+    float: left;
+    position: absolute;
+    border-radius: 4px;
+}
+.music-img img{
+    border-radius: 5px;
+
+}
+@media (max-width:1040px){
+    .music-img{
+      width: 148px;
+      height: 151px;
+      top: -30px;
+      position: absolute;
+    }
+    .pagemusic{
+        height: 180px;
+        position: relative;
+       
+        
+    }
+    .music-data{
+        margin-top: 40px;
+        width: 190px;
+        
+       
+        height: 190px;
+    }
+    
+}
+
+@media (max-width:790px){
+    .music-img{
+      width: 20vw;
+      height: 30vh;
+      top: -30px;
+      position: absolute;
+    }
+
+    /* .music-data{
+        display: none;
+    } */
+    .pagemusic{
+        width: 100%;
+        min-height: 30vh;
+        position: relative;
+        border-radius: 4px;
+        background-color: var(--light-black);
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

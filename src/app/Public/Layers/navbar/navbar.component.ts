@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userset.getUser().subscribe((res: user[])=>{
       this.userGet = res;
-   });
+    });
   }
 
 }
