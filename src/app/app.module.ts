@@ -14,7 +14,6 @@ import { SidenavComponent } from './Public/Layers/sidenav/sidenav.component';
 import { MusicplayerComponent } from './Public/Layers/musicplayer/musicplayer.component';
 import { HomeComponent } from './Public/pages/home/home.component';
 import { BrowseComponent } from './Public/pages/browse/browse.component';
-import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
@@ -31,19 +30,21 @@ import { SinglemusicComponent } from './Public/pages/singlemusic/singlemusic.com
   declarations: [
     AppComponent,
     PagesComponent,
+    //Users
     LoginComponent,
     SignupComponent,
+    //Layers
     NavbarComponent,
     SidenavComponent,
     MusicplayerComponent,
+    OverlayComponent,
+    //Pages
     HomeComponent,
     BrowseComponent,
-    ChartsComponent,
     NewreleaseComponent,
     PlaylistComponent,
     NotFoundComponent,
     ProfileComponent,
-    OverlayComponent,
     PlayingComponent,
     AllComponent,
     SinglemusicComponent,

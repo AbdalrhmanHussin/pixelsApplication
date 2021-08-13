@@ -46,6 +46,7 @@
               "node_modules/owl.carousel2/dist/owl.carousel.min.js",
               "src/assets/js/owlConfig.js",
               "src/assets/js/404.js",
+              "src/assets/js/darkmode.js",
               "./node_modules/wavesurfer.js/dist/wavesurfer.js"
 
             ]

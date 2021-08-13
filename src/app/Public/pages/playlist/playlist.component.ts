@@ -42,6 +42,10 @@ export class PlaylistComponent implements OnInit {
   playlistDisplayImg:any = "../../../../assets/images/noimg.jfif";
 
   activeItem:any;
+
+  activePlaylist = JSON.parse(localStorage.getItem('playingType') || '{}').id;
+
+  activeSong:any;
   
   //load playlist 
   getPlaylistAction(index:number = 0) {
@@ -50,9 +54,6 @@ export class PlaylistComponent implements OnInit {
       'playingType': 'playlist',
       'id'         :  this.id
     }
-
-    localStorage.setItem('playingType',JSON.stringify(data));
-
     this.transferePlaylist(this.playlistArray,index);
     this.getActiveList();
   }
@@ -60,8 +61,13 @@ export class PlaylistComponent implements OnInit {
   //add the playlist to the payload in music components 
   transferePlaylist(playlist:any,playCounter:number = 0) {
     let playing = this.playlistData.id;
+    this.write.playCounterActive.subscribe((res)=>{
+      this.activeSong = res;
+      console.log(res)
+      this.addActiveForce(res,playing); 
+    })
     this.write.playingMode.next({mode:'playlist',playlist:playing});
-    this.write.playlist.next({playlist,playCounter});
+    this.write.playlist.next({playing,playlist,playCounter});
   }
   
   //get the image and the name of active song
@@ -84,6 +90,7 @@ export class PlaylistComponent implements OnInit {
         playArray.push(chunk);
         this.playlistArray = playArray;
     });
+    // this.addActiveForce( this.activeSong);
   }
 
   //delete item from payload
@@ -105,11 +112,14 @@ export class PlaylistComponent implements OnInit {
     });
   };
 
-  ngOnInit(): void {
-    this.write.playlistPayload.subscribe((res)=>{
-      console.log(res);
-    })
-    
+  addActiveForce(num:number,workingPlaylist:number) {
+     if(workingPlaylist == this.activePlaylist) {
+      $('.song-list.active').removeClass('active');
+      $('.song-list').eq(num).addClass('active');
+     }
+  }
+
+  ngOnInit(): void {    
     //init the page in playlist
     if(this.playlistPage) {
       $('.tb-page').css({
@@ -122,6 +132,7 @@ export class PlaylistComponent implements OnInit {
     }
     this.route.params.subscribe(params => {  
       this.id = params['id'];
+      console.log(this.id);
       if(!isNaN(this.id) && this.id > 0) {
         if( this.id == this.jsonStatus.id) {
         }
@@ -132,7 +143,12 @@ export class PlaylistComponent implements OnInit {
         })
 
         this.read.getPlaylistMusics(this.id).subscribe(res => {
-          this.playlistFormate(res); 
+          let data:any = res[0];
+          if(data[0] == undefined) {
+            this.router.navigateByUrl('notfound');
+          } else {
+            this.playlistFormate(res); 
+          }
         });
 
       } else if(this.id == 0){
@@ -143,6 +159,7 @@ export class PlaylistComponent implements OnInit {
       } else {
         this.router.navigateByUrl('notfound');
       }
+     
     });
 
   }

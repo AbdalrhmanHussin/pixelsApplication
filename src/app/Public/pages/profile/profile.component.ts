@@ -28,11 +28,9 @@ declare var $: any;
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['../pages.css']
 })
 export class ProfileComponent implements OnInit {
-
-
   private limit: number = 10;
   //Popular
   PopularSlides: any = this.read.Popular;
@@ -81,7 +79,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    $('.tb-page').removeAttr('style');
     this.read.getPlaylist().subscribe(data => {
        this.playlist     = data[0];
        this.playlistKeys = Object.keys(this.playlist);

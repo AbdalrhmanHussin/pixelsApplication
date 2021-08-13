@@ -5,7 +5,7 @@ import { PagesComponent } from '../pages.component';
 @Component({
   selector: 'app-newrelease',
   templateUrl: './newrelease.component.html',
-  styleUrls: ['./newrelease.component.css']
+  styleUrls: ['../pages.css']
 })
 export class NewreleaseComponent implements OnInit {
 
@@ -14,6 +14,7 @@ export class NewreleaseComponent implements OnInit {
   category:any;
 
   ngOnInit(): void {
+    $('.tb-page').removeAttr('style');
     this.read.getallcategory().subscribe(res => {
         this.category = res;
         setTimeout(() => {

@@ -8,6 +8,7 @@ import { WriteService } from 'src/app/Services/write.service';
   selector: 'app-playing',
   templateUrl: './playing.component.html',
   styleUrls: ['./playing.component.css']
+
 })
 export class PlayingComponent implements OnInit {
   getPlaylistAction(index:number = 0) {
@@ -16,6 +17,11 @@ export class PlayingComponent implements OnInit {
     }
     localStorage.setItem('playingType',JSON.stringify(data));
     this.transferePlaylist(this.musicInRow,index);
+  }
+
+  //delete item from payload
+  removeFromPayload(musicID:number) {
+    this.write.deleteFromList.next({musicID});
   }
 
   transferePlaylist(playlist:any,playCounter:number = 0) {

@@ -53,7 +53,35 @@ export class PagesComponent implements OnInit {
             576: {
                 items:2
             },
-            992:{
+            840:{
+                items:3
+            },
+            1100:{
+                items:4
+            },
+            1300:{
+                items:5
+            }
+        }
+    });
+    } else if(req == '5rowInitLooper') {
+      $(".owl-carousel.fiveOwlLooper").owlCarousel({
+        margin:23,
+        lazyLoad: true,
+        loop: true,
+        nav: true,
+        dots: false,
+        autoplay: false,
+        autoplayTimeout: 4000,
+        navText : ["<ion-icon name='chevron-back-outline'></ion-icon>","<ion-icon name='chevron-forward-outline'></ion-icon>"],
+        responsive:{
+            0:{
+                items:2
+            },
+            576: {
+                items:2
+            },
+            790:{
                 items:3
             },
             1000:{
@@ -92,8 +120,9 @@ export class PagesComponent implements OnInit {
         let id:any = $(this).attr('id');
         $('.play').not($(this)).children('i').removeClass('fa-pause').addClass('fa-play')
         $(this).children('i').toggleClass('fa-play fa-pause');
+        localStorage.setItem('playingType',JSON.stringify({'playingType':'music'}))
         playFn(id);
-    })
+    });   
   }
 
 

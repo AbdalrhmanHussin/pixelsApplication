@@ -56,7 +56,7 @@ export class MusicplayerComponent implements OnInit {
    playlistColor = true;
    shuffleColor  = true;
    isLikeProps :boolean=false;
-   playingPlaylist = JSON.parse(localStorage.getItem('playingType') || '{}' ) ?? '' ;
+   playingPlaylist:any;
    oldActive:any;
    isPlaying:any;
 
@@ -73,9 +73,8 @@ export class MusicplayerComponent implements OnInit {
     this.playlistImgLooping(this.playImg);
     this.payLoadExport(this.payload);
     this.loadedMusic(this.payload[this.playCounter]);
-    console.log(this.payload);
     this.write.playingMode.subscribe(res =>{
-       console.log(res);
+      //  console.log(res);
     });
     this.music.addEventListener('loadeddata', (): void => {
       this.loader = false;
@@ -188,7 +187,7 @@ export class MusicplayerComponent implements OnInit {
     this.playTarget = false;
   }
 
-
+  //change the color of playlist toggler
   playlistInc() {
     this.playlistLocker = (this.playlistLocker == 1) ? 0 : 1;
     this.playlistColor  = (this.playlistColor == false) ? true : false;
@@ -223,12 +222,19 @@ export class MusicplayerComponent implements OnInit {
     this.likeService.isLike(this.payload[this.playCounter][4])
       .subscribe((res: { isLike: boolean }) => {
         this.isLikeProps  = res.isLike;
-        console.log(res);
     });
   }
 
   checkPlayCounter() {
     this.write.playCounterActive.next(this.playCounter);
+  }
+
+  toggleActivePlaylist(num:number,playlist:number) {
+    let activePlaylist = JSON.parse(localStorage.getItem('playingType') || '{}').id;
+    if(activePlaylist !== null || activePlaylist !== undefined || activePlaylist) {
+      $('.song-list.active').removeClass('active');
+      $('.song-list').eq(num).addClass('active');
+    }
   }
 
   ngOnInit(): void {
@@ -239,9 +245,16 @@ export class MusicplayerComponent implements OnInit {
     
     this.write.deleteFromList.subscribe((data) => {
       if(data !== null) {
-         if(data.playlistID == this.playingPlaylist.id) {
+         if(data.playlistID == this.playingPlaylist && data.playlistID !== undefined) {
           this.payload.splice(data.musicID,1);
-         } 
+         } else {
+            let mode = JSON.parse(localStorage.getItem('playingType')|| '{}').playingType;
+            console.log(mode,data.musicID);
+            if(mode ) {
+              this.payload.splice(data.musicID,1);
+              console.log(this.payload);
+            }
+         }
       }
     })
     this.write.playlist.subscribe((data) => {
@@ -249,9 +262,9 @@ export class MusicplayerComponent implements OnInit {
         this.payload = [];
         this.payload = data.playlist;
         this.playCounter = data.playCounter;
-        (this.playCounter == this.oldActive) ? this.play() : this.ready(this.playCounter);
-        this.oldActive = this.playCounter;
-        console.log(this.oldActive,this.playCounter)
+        (this.playCounter == this.oldActive && (this.playingPlaylist == data.playing || this.playingPlaylist == undefined)) ? this.play() : this.ready(this.playCounter);
+        this.oldActive  = this.playCounter;
+        this.playingPlaylist = data.playing; 
       }
    });
     this.read.musictrack.subscribe((data)=>{
@@ -297,14 +310,19 @@ export class MusicplayerComponent implements OnInit {
       $('.play i').addClass('fa-play').removeClass('fa-pause');
       if(this.shuffleLocker == 1) {
           this.playCounter = Math.floor(Math.random() * this.payload.length);
-          console.log('Random number'+this.playCounter);
           this.ready(this.playCounter);
       } else {
-        if (this.playlistLocker == 0) {
-          this.reset();
-          this.load();
+        if (this.playlistLocker == 1) {
+           this.reset();
+           this.load();
+           this.play();
         } else {
-          this.next();
+           if(this.playCounter == this.payload.length -1) {
+              this.next();
+              this.play()
+           } else {
+              this.next();
+           }
         }
       }
     });
