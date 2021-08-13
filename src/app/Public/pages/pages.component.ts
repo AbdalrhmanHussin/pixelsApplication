@@ -120,10 +120,9 @@ export class PagesComponent implements OnInit {
         let id:any = $(this).attr('id');
         $('.play').not($(this)).children('i').removeClass('fa-pause').addClass('fa-play')
         $(this).children('i').toggleClass('fa-play fa-pause');
+        localStorage.setItem('playingType',JSON.stringify({'playingType':'music'}))
         playFn(id);
-    });
-    console.log($('img'));
-   
+    });   
   }
 
 

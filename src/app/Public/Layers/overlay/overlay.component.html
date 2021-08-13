@@ -15,10 +15,15 @@
         <div class="playlists p-2">
             <label>Or add to pre exist playlist</label>
 
-            <div class="playlist_data mt-2 d-flex align-items-center" *ngFor="let item of playlistsKey">
-                <div class="data">
-                    <h4>{{ playlists[item].name }}</h4>
-                    <p>{{ playlists[item].created_at | date:'mediumDate'}}</p>
+            <div class="playlist_data mt-2 d-flex align-items-center" *ngFor="let item of playlistsKey" #div>
+                <div class="data d-flex">
+                    <span (click)="playlistRemove(playlists[item].id,div)" class="color-wh mr-2">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </span>
+                    <div>
+                        <h4>{{ playlists[item].name }}</h4>
+                        <p>{{ playlists[item].created_at | date:'mediumDate'}}</p>
+                    </div>
                 </div>
                 <button class="ml-auto" *ngIf="showExistance(playlists[item].id,btn.id)" (click)="playlistAdd(playlists[item].id,btn.id)">Save</button>
                 <button class="ml-auto" *ngIf="!showExistance(playlists[item].id,btn.id)" (click)="playlistAdd(playlists[item].id,btn.id)">Remove</button>

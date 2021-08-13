@@ -229,6 +229,14 @@ export class MusicplayerComponent implements OnInit {
     this.write.playCounterActive.next(this.playCounter);
   }
 
+  toggleActivePlaylist(num:number,playlist:number) {
+    let activePlaylist = JSON.parse(localStorage.getItem('playingType') || '{}').id;
+    if(activePlaylist !== null || activePlaylist !== undefined || activePlaylist) {
+      $('.song-list.active').removeClass('active');
+      $('.song-list').eq(num).addClass('active');
+    }
+  }
+
   ngOnInit(): void {
     let ball:any = document.getElementById('ball');
     let ballVl: any = document.getElementById('ballVl');
@@ -237,9 +245,16 @@ export class MusicplayerComponent implements OnInit {
     
     this.write.deleteFromList.subscribe((data) => {
       if(data !== null) {
-         if(data.playlistID == this.playingPlaylist) {
+         if(data.playlistID == this.playingPlaylist && data.playlistID !== undefined) {
           this.payload.splice(data.musicID,1);
-         } 
+         } else {
+            let mode = JSON.parse(localStorage.getItem('playingType')|| '{}').playingType;
+            console.log(mode,data.musicID);
+            if(mode ) {
+              this.payload.splice(data.musicID,1);
+              console.log(this.payload);
+            }
+         }
       }
     })
     this.write.playlist.subscribe((data) => {

@@ -54,8 +54,6 @@ export class PlaylistComponent implements OnInit {
       'playingType': 'playlist',
       'id'         :  this.id
     }
-
-    localStorage.setItem('playingType',JSON.stringify(data));
     this.transferePlaylist(this.playlistArray,index);
     this.getActiveList();
   }
@@ -63,6 +61,11 @@ export class PlaylistComponent implements OnInit {
   //add the playlist to the payload in music components 
   transferePlaylist(playlist:any,playCounter:number = 0) {
     let playing = this.playlistData.id;
+    this.write.playCounterActive.subscribe((res)=>{
+      this.activeSong = res;
+      console.log(res)
+      this.addActiveForce(res,playing); 
+    })
     this.write.playingMode.next({mode:'playlist',playlist:playing});
     this.write.playlist.next({playing,playlist,playCounter});
   }
@@ -109,20 +112,14 @@ export class PlaylistComponent implements OnInit {
     });
   };
 
-  addActiveForce(num:number) {
-     console.log(this.id , this.activePlaylist);
-     if(this.id == this.activePlaylist) {
+  addActiveForce(num:number,workingPlaylist:number) {
+     if(workingPlaylist == this.activePlaylist) {
       $('.song-list.active').removeClass('active');
       $('.song-list').eq(num).addClass('active');
      }
   }
 
-  ngOnInit(): void {
-    this.write.playCounterActive.subscribe((res)=>{
-      this.activeSong = res;
-      this.addActiveForce(res); 
-    })
-    
+  ngOnInit(): void {    
     //init the page in playlist
     if(this.playlistPage) {
       $('.tb-page').css({
@@ -135,6 +132,7 @@ export class PlaylistComponent implements OnInit {
     }
     this.route.params.subscribe(params => {  
       this.id = params['id'];
+      console.log(this.id);
       if(!isNaN(this.id) && this.id > 0) {
         if( this.id == this.jsonStatus.id) {
         }
@@ -146,7 +144,6 @@ export class PlaylistComponent implements OnInit {
 
         this.read.getPlaylistMusics(this.id).subscribe(res => {
           let data:any = res[0];
-          console.log(data[0]);
           if(data[0] == undefined) {
             this.router.navigateByUrl('notfound');
           } else {
@@ -162,6 +159,7 @@ export class PlaylistComponent implements OnInit {
       } else {
         this.router.navigateByUrl('notfound');
       }
+     
     });
 
   }

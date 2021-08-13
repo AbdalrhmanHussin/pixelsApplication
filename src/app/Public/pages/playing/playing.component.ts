@@ -19,6 +19,11 @@ export class PlayingComponent implements OnInit {
     this.transferePlaylist(this.musicInRow,index);
   }
 
+  //delete item from payload
+  removeFromPayload(musicID:number) {
+    this.write.deleteFromList.next({musicID});
+  }
+
   transferePlaylist(playlist:any,playCounter:number = 0) {
     this.write.playingMode.next({mode:'music',playlist: null});
     this.write.playlist.next({playlist,playCounter});

@@ -19,10 +19,7 @@
       </div>
     </div>
     <div class="playlist-body mt-5">
-      <Div class="song-list  container-fluid align-items-center" *ngFor="let item of playJson">
-        <button class="playbtn" #div>
-          <i class="fas fa-play"></i>
-        </button>
+      <Div class="song-list  container-fluid align-items-center" *ngFor="let item of playJson;let i=index">
         <div class="song-info d-flex align-items-center ml-3">
           <img [src]="item['img']">
           <div class="ml-3">
@@ -32,7 +29,7 @@
         </div>
         <div class="ml-5 pl-4 rel">
         </div>
-        <button class="ml-auto mr-3">
+        <button class="ml-auto mr-3" (click)="removeFromPayload(i)">
           Remove
         </button>
       </Div>
