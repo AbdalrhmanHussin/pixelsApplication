@@ -8,20 +8,32 @@
                <img src="/assets/images/logo.white.png"/>
            </div>
         </div>
-        <form class=" d-flex justify-content-center align-items-center h-100 position-relative search-form">
-            <input class="form-control fs-12 fw-500" type="search" placeholder="Search...">
+        <form class=" d-flex justify-content-center align-items-center h-100 position-relative search-form" [ngClass]="{'active': activeSearch && windowWidth < 992 , 'd-flex': windowWidth > 992 ,'d-none': windowWidth < 992 }">
+            <input [(ngModel)]="searchQuery"  class="form-control fs-12 fw-500" type="text" placeholder="Search..."  name="search"  (keyup) = "getAllSearch()" (click) ="toggleShow()" autocomplete="off">
             <label class="position-absolute color-wh ">
                <ion-icon name="search-outline"></ion-icon>
+               <ion-icon name="close" [ngClass]="{'d-none': windowWidth > 992 }" class="ml-3" (click)="searchToggler()"></ion-icon>
             </label>
-            <div class="tb-results">
-                
-            </div>
-            <div class="searchResult position-absolute top-0">
-                
-            </div>
+
+             <div class="searchResult  w-100 position-absolute top-0 mt-5 flex-start d-flex" *ngIf="isShown" >
+                <table style="color: bisque;  background-color: rgba(0, 0, 0, 0.507); "
+                 class="searchInput w-100">
+                    <thead>
+                        <td>Search For: {{searchQuery}}</td>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let music  of allSearch" >
+                            <td class="res">{{music.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>   
+             </div>
+
         </form>
         <div class="sign d-flex justify-content-end align-items-center pr-3">
-            <p class="fs-14 fw-500  mb-0 d-flex justify-content-end align-items-center color-gr mr-3"><ion-icon name="search-outline"></ion-icon></p>
+            <p class="fs-14 fw-500  mb-0 d-flex justify-content-end align-items-center color-gr mr-3">
+              <ion-icon name="search-outline" (click)="searchToggler()"></ion-icon>
+            </p>
             <div class="fs-12 fw-500  mb-0 d-flex justify-content-end align-items-center color-gr" *ngIf="userGet">
                 <ion-icon name="person-circle-outline" class="fs-20 pr-2"></ion-icon>
                 <div>

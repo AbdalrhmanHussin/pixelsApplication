@@ -29,6 +29,41 @@ nav form input {
 }
 nav form label {
     right: 20px;
-    top: 21px;
-    
+    top: 21px;  
+}
+
+nav form.active {
+    display: block !important;
+    width: 100%;
+    height: 100% !important;
+    position: absolute !important;
+    border-radius: 0 !important;
+    z-index: 100;
+}
+
+nav form.active input {
+    height: 100% !important;
+    border-radius: 0% !important;
+}
+
+.searchResult{
+    overflow: auto;
+    background: var(--black);
+    top: 4px;
+    font-size: 12px;
+}
+.searchResult td{
+    padding: 5px 5px;
+    border-radius: 3px;  
+}
+.searchResult td {
+    padding: 10px;
+    width: 100%;
+    color: var(--white);
+}
+.searchResult td.res {
+    cursor: pointer;
+}
+.searchResult td.res:hover {
+    background: var(--dark-sliver);
 }

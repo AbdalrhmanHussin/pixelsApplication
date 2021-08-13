@@ -37,7 +37,7 @@
       </div>
       <div class="musicInfo">
         <h3 class="fs-12 fw-400 pl-2 pt-3 color-wh">{{ item.name }}</h3>
-        <h4 class="fs-12 fw-400 pl-2 pb-3 color-wh color-sv">{{ item.band }}</h4>
+        <h4 class="fs-10 fw-400 pl-2 pb-3 color-sv">{{ item.band }}</h4>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@
 </section>
 <section class="category mt-5">
   <h3 class="fs-17 fw-500 color-wh  pb-2">Random Picks</h3>
-  <div class="owl-carousel fiveOwl">
+  <div class="owl-carousel fiveOwlLooper mb-3">
     <div class="tb-music-box-sm secBrowse1  d-grid" *ngFor="let item of rand">
       <img src="{{ item.img }}">
       <div class="overlay-bx">
@@ -64,7 +64,7 @@
       </div>
       <div class="musicInfo">
         <h3 class="fs-12 fw-400 pl-2 pt-3 color-wh">{{ item.name }}</h3>
-        <h4 class="fs-12 fw-400 pl-2 pb-3 color-wh color-sv">{{ item.band }}</h4>
+        <h4 class="fs-10 fw-400 pl-2 pb-3  color-sv">{{ item.band }}</h4>
       </div>
     </div>
   </div>
@@ -80,19 +80,3 @@
   </ul>
 </footer>
 
-<form action="">
-    email
-   password
-</form>
-
-<form>
-  username
-</form>
-
-<form>
-   email
-</form>
-
-<form>
-   password
-</form>

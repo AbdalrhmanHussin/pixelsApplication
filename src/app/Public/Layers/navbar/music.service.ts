@@ -15,7 +15,7 @@ export class MusicService {
    let data = {
       'searchQuery': searchQuery
    }
-   return this.http.post(this.baseURL,data);
+   return this.http.post(`${this.baseURL}/${searchQuery}`,data);
   }
  
   
