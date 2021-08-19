@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
   //Popular
   PopularSlides:any = this.read.Popular;
   NewSlides:any = this.read.New;
-
-
   alltrackes:Music[] = [];
  //iserror:boolean=false;
   
@@ -27,7 +25,8 @@ export class HomeComponent implements OnInit {
   
   
   ngOnInit(): void {
-  
+    //init the page to regular form
+    $('.tb-page').removeAttr('style');
     this.read.getalltracks(this.limit).subscribe((musics: Music[]) => {
          this.alltrackes = musics;
          setTimeout(() => {
@@ -44,8 +43,9 @@ export class HomeComponent implements OnInit {
           this.read.musictrack.next([
             res.music.src,
             res.music.name,
-           res.music.band,
-          res.music.img
+            res.music.band,
+            res.music.img,
+            res.music.id
           ]);
         }
         console.log(res);

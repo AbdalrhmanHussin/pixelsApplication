@@ -14,21 +14,18 @@ import { SidenavComponent } from './Public/Layers/sidenav/sidenav.component';
 import { MusicplayerComponent } from './Public/Layers/musicplayer/musicplayer.component';
 import { HomeComponent } from './Public/pages/home/home.component';
 import { BrowseComponent } from './Public/pages/browse/browse.component';
-import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
 import * as $ from 'jquery';
-import { UserConfigService } from './Services/user-config.service';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
-// function userConfig(user: UserConfigService) {
-//   // do the async tasks at here
-//   return () => user.snipToken()
-// }
-
+import { PlayingComponent } from './Public/pages/playing/playing.component';
+import { SettingProfileComponent } from './Public/users/setting-profile/setting-profile.component';
+import { ChartsComponent } from './Public/pages/charts/charts.component';
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,12 +37,14 @@ import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
     MusicplayerComponent,
     HomeComponent,
     BrowseComponent,
-    ChartsComponent,
     NewreleaseComponent,
     PlaylistComponent,
     NotFoundComponent,
     ProfileComponent,
     OverlayComponent,
+    PlayingComponent,
+    SettingProfileComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,16 +54,11 @@ import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
     CarouselModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastNoAnimationModule.forRoot(),
   ],
   providers: [
-    // UserConfigService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: userConfig,
-    //   multi: true,
-    //   deps: [UserConfigService]
-    // }
+    
   ],
   bootstrap: [AppComponent]
 })

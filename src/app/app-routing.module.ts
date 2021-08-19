@@ -5,9 +5,11 @@ import { HomeComponent } from './Public/pages/home/home.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
 import { PagesComponent } from './Public/pages/pages.component';
+import { PlayingComponent } from './Public/pages/playing/playing.component';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { LoginComponent } from './Public/users/login/login.component';
+import { SettingProfileComponent } from './Public/users/setting-profile/setting-profile.component';
 import { SignupComponent } from './Public/users/signup/signup.component';
 
 const routes: Routes = [
@@ -29,11 +31,19 @@ const routes: Routes = [
       },
       {
         path: 'charts',
-        component: ChartsComponent
+        component:ChartsComponent
       },
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      { 
+        path: 'playlist/:id', 
+        component: PlaylistComponent
+      },
+      { 
+        path: 'playing', 
+        component: PlayingComponent
       },
       {
         path: '',
@@ -44,6 +54,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'Register', component: SignupComponent },
+  {path:'Settingprofile' , component:SettingProfileComponent},
   { path: 'playlist/:id', component: PlaylistComponent },
   { path: 'playlist', component: PlaylistComponent },
   { path: '**', component: NotFoundComponent  }

@@ -11,12 +11,12 @@ export class UserConfigService {
   protected $user:{} = [];
   constructor(protected http:HttpClient) { }
   private userConfig:any;
-  getUser(): Observable<user[]> {
+  getUser(): Observable<user> {
     let sanctum = localStorage.getItem('User');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${sanctum}`
     });
-     return this.http.post<user[]>('http://localhost:8000/api/snip',null,{headers: headers});
+     return this.http.post<user>('http://localhost:8000/api/snip',null,{headers: headers});
   }
   // snipToken() {
   //   if(localStorage.getItem('User') !== null) {

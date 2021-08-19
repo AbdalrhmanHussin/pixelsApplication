@@ -1,4 +1,4 @@
-<div class="musicPlayer w-100 position-fixed d-grid grid-custom container-fluid ">
+<div class="musicPlayer w-100 position-fixed d-grid grid-custom container-fluid" [ngClass]="{'d-none': (payload.length == 0)}" >
     <div class="controllers d-flex align-items-center justify-content-around">
     <ion-icon name="arrow-back" class="color-wh fs-12 fs-18" id="prev" (click)="prev()"></ion-icon>
     <ion-icon name="play" class="color-wh fs-23" id="play" (click)="play()" *ngIf="!loader && !playTarget"></ion-icon>
@@ -32,10 +32,12 @@
                 <div class="bar" id="volBall" (mouseenter)="volume($event)" [style.width]="volwidth"></div>
                 <div class="ball  position-absolute" id="ballVl" [style.left]="volwidth"></div>
             </div>
-            <div><i [ngClass]="isfav ? 'fas' : 'far'" class="fa-heart" style="color: white;" (click)='toggelfavicon()'></i></div>
       </div>
    </div>
-   <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn">
-       <ion-icon name="apps-outline"></ion-icon>
-   </div>
+   <Div class="d-flex align-items-center">
+    <div><i *ngIf=' payload.length!==0' [ngClass]="isLikeProps? 'fas' : 'far'" class="fa-heart" style="color: white;" (click)='toggelfavicon()'></i></div>
+    <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn">
+        <ion-icon name="apps-outline"></ion-icon>
+    </div>
+   </Div>
 </div>

@@ -10,9 +10,9 @@ import { user } from 'src/app/_model/user';
 })
 export class NavbarComponent implements OnInit {
   constructor(private http:HttpClient,private userset:UserConfigService) { }
-  userGet:any = [];
+  userGet:any ;
   ngOnInit(): void {
-    this.userset.getUser().subscribe((res: user[])=>{
+    this.userset.getUser().subscribe((res: user)=>{
       this.userGet = res;
    });
   }

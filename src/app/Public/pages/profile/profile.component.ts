@@ -1,7 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
+import { LikeService } from 'src/app/Services/like.service';
 import { ReadConfigService } from 'src/app/Services/read-config.service';
 import { UserConfigService } from 'src/app/Services/user-config.service';
+import { LikeInterface } from 'src/app/_model/like';
 import { Music } from 'src/app/_model/music';
 import { PagesComponent } from '../pages.component';
 declare var $: any;
@@ -20,15 +22,32 @@ export class ProfileComponent implements OnInit {
   NewSlides:any = this.read.New;
 
 
-  alltrackes:Music[] = [];
+  alltrackes:any[] = [];
  //iserror:boolean=false;
-  
+  likes:any[]=[];
 
-  constructor(public owl:PagesComponent,public read:ReadConfigService,public user:UserConfigService) { }
+  constructor(
+    public owl:PagesComponent,
+    public read:ReadConfigService,
+    public user:UserConfigService,
+    private likeService: LikeService) { }
   
   
   ngOnInit(): void {
+   
   
+    this.likeService.likes.subscribe(data => {
+      
+      if (data) {
+        if (data?.action === true) {
+          this.getAllMusicLikes();
+          
+        }
+       
+      }
+      
+    })
+
     this.read.getalltracks(this.limit).subscribe((musics: Music[]) => {
          this.alltrackes = musics;
          setTimeout(() => {
@@ -36,6 +55,7 @@ export class ProfileComponent implements OnInit {
           this.owl.loadOwl('4rowInit')
         }, 10); 
     });
+    this.getAllMusicLikes();
   }
   
   gettrackeByID(id:number):void{
@@ -45,7 +65,8 @@ export class ProfileComponent implements OnInit {
             res.music.src,
             res.music.name,
            res.music.band,
-          res.music.img
+          res.music.img,
+          res.music.id
           ]);
         }
         console.log(res);
@@ -56,6 +77,14 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+
+  getAllMusicLikes(): void {
+    this.likeService.songLikes().subscribe((res: LikeInterface) => {
+      console.log('profile', res);
+      this.likes = res.likes;
+      
+    });
+  }
  
 
 }

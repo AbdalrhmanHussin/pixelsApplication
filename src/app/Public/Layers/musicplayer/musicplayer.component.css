@@ -25,6 +25,7 @@
  .musicPlayer img {
      width: 59px;
      padding: 10px;
+     height: 56px;
      border-radius: 14px;
  }
  .musicPlayer .timeSettings {
