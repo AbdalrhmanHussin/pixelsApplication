@@ -12,7 +12,11 @@ import { UserConfigService } from 'src/app/Services/user-config.service';
 export class SignupComponent implements OnInit {
 
   constructor(private http:HttpClient,private router:Router,private userData:UserConfigService) { }
-  validation:any;
+  validation:any = {
+    'name': '',
+    'email': '',
+    'password': ''
+  };
  
   ngOnInit(): void {
   }
@@ -25,13 +29,13 @@ export class SignupComponent implements OnInit {
       'password_confirmation': form.value.password_confirmation
     }
     this.http.post('http://127.0.0.1:8000/api/register',data).subscribe((res:any)=>{
-         console.log(res.register);
-        if(res.register == 'success') {
+        if(res.message == 'success') {
             localStorage.setItem('User',res.token);
-            
             this.router.navigate(['/']);
         } else {
-            this.validation = res.validations;
+            this.validation['name']     = res.validation[1] ?? '';
+            this.validation['email']    = res.validation[0] ?? '';
+            this.validation['password'] = res.validation[2] ?? '';
         }
     },(err)=>{
         console.log(err);

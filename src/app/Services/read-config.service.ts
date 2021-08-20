@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Music } from '../_model/music';
 import { playlist } from '../_model/playlist';
 import { NumberValueAccessor } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ObservedValueOf } from 'rxjs';
 import { playlistData } from '../_model/playlist-data';
 
 @Injectable({
@@ -62,8 +62,12 @@ export class ReadConfigService {
       return  this.http.post<playlistData[]>('http://127.0.0.1:8000/api/playlist/getplaylist',data,{headers: headers});
   }
 
-  getalltracks(limit: number): Observable<Music[]> {
-    return this.http.get<Music[]>(this.Url + 'bundle/popularity/' + limit);
+  getalltracks(limit: number,order: string = 'popular'): Observable<Music[]> {
+    return this.http.get<Music[]>(this.Url + `category/getorder/${order}/${limit}`);
+  }
+
+  getallBands(): Observable<Music[]> {
+    return this.http.get<Music[]>(this.Url + `category/getbyband`);
   }
 
   // get track by id
@@ -71,4 +75,7 @@ export class ReadConfigService {
     return this.http.get<{message:string,music:Music}>(`${this.Url}show/${id}`);
   }
 
+  getallcategory():  Observable<{message:string,music:Music}> {
+    return this.http.get<{message:string,music:Music}>(`${this.Url}category/getcategory`);
+  }
 }

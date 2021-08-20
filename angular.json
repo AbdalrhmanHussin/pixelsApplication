@@ -1,7 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
+<<<<<<< HEAD
     "analytics": "73c955e4-9ba2-4de2-aefe-c37d8f9ba3e1"
+=======
+    "analytics": "17651b66-c41a-4d81-b55f-2ae9178623a6"
+>>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -47,6 +51,7 @@
               "node_modules/owl.carousel2/dist/owl.carousel.min.js",
               "src/assets/js/owlConfig.js",
               "src/assets/js/404.js",
+              "src/assets/js/darkmode.js",
               "./node_modules/wavesurfer.js/dist/wavesurfer.js"
 
             ]

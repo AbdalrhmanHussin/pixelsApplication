@@ -57,12 +57,27 @@ export class OverlayComponent implements OnInit {
       this.playlistFetch();
     });
   }
+  
+  playlistRemove(playlist:number,ele:HTMLElement){
+    let accept = confirm('Are you sure that you want to delete this playlist');
+    let sanctum = localStorage.getItem('User');
+    let headers = new HttpHeaders({
+      Authorization: `Bearer ${sanctum}`,
+      Accept: 'application/json'
+    });
+
+    if(accept) {
+      this.http.delete(`http://127.0.0.1:8000/api/playlist/delete/${playlist}`,{headers:headers}).subscribe((res)=>{
+        ele.remove();
+      });
+    }
+  }
 
   playlistCreateAdd(form: NgForm,id:any) {
     let data = {
       'name': form.value.playlist,
       'id': id
-    }
+  }
 
     let sanctum = localStorage.getItem('User');
     let headers = new HttpHeaders({
@@ -97,7 +112,7 @@ export class OverlayComponent implements OnInit {
    this.playlistFetch();
     //display overlay
 
-    $('.category').on('click', '.menu', function () {
+    $('.tb-page').on('click', '.menu', function () {
       let id:any = $(this).attr('id');
       $(".overlay").css('display', 'flex');
       setTimeout(() => {

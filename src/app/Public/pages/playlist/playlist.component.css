@@ -50,7 +50,7 @@
     height: 80px;
     margin-bottom: 2px;
     display: grid !important;
-    grid-template-columns: 5% 15% 70% 10%;
+    grid-template-columns: 20% 70% 10%;
 }
 
 .playlist .song-list.active {

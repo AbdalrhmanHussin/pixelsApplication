@@ -1,10 +1,14 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import routes from 'src/app/app-routing.module';
 import { WriteService } from 'src/app/Services/write.service';
 
 @Component({
   selector: 'app-playing',
   templateUrl: './playing.component.html',
   styleUrls: ['./playing.component.css']
+
 })
 export class PlayingComponent implements OnInit {
   getPlaylistAction(index:number = 0) {
@@ -15,10 +19,16 @@ export class PlayingComponent implements OnInit {
     this.transferePlaylist(this.musicInRow,index);
   }
 
+  //delete item from payload
+  removeFromPayload(musicID:number) {
+    this.write.deleteFromList.next({musicID});
+  }
+
   transferePlaylist(playlist:any,playCounter:number = 0) {
+    this.write.playingMode.next({mode:'music',playlist: null});
     this.write.playlist.next({playlist,playCounter});
   }
-  constructor(private write:WriteService) { }
+  constructor(private write:WriteService,private router:Router) { }
   name:string = 'Not Set';
   img:string  = "../../../../assets/images/noimg.jfif";
   band:string = 'Not Set';
@@ -38,6 +48,10 @@ export class PlayingComponent implements OnInit {
     });
 
     this.write.playlistPayload.subscribe((res)=>{
+      this.write.playingMode.subscribe(res =>{
+          console.log(res);
+         (res.mode == 'music') ??  this.router.navigate(['notfound']);
+      });
       this.musicInRow = res;
       this.playListCount = this.musicInRow.length;
       this.playJson = []; // -> to prevent double push and repeting the items
@@ -51,6 +65,9 @@ export class PlayingComponent implements OnInit {
          }
 
          this.playJson.push(chunk);
+         this.name = this.playJson[0]['name'];
+         this.img  = this.playJson[0]['img'];
+         this.band = this.playJson[0]['band'];
          
       });
  

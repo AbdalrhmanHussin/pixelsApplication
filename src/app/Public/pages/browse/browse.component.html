@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ul class="navbar-nav flex-row Taber color-wh fs-13 mb-5">
     <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/home">Discover</a></li>
     <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/browse">Browse</a></li>
@@ -84,4 +85,33 @@
       <li class="nav-item pr-2">Feedback</li>
     </ul>
   </footer>
+=======
+<section class="category mt-5" *ngFor="let keys of objKeys">
+    <h3 class="fs-17 fw-500 color-wh  pb-2">{{ keys }}</h3>
+    <div class="owl-carousel fiveOwl">
+      <div class="tb-music-box-sm secBrowse1  d-grid" *ngFor="let item of bands[keys];let i = index">
+        <img src="{{item.img }}">
+        <div class="overlay-bx">
+          <ion-icon name="ellipsis-vertical-outline" class="icon1 menu" [id]="item.id"></ion-icon>
+          <button class="trans-me pr-2 color-sv play" id="{{ item.id }}"><i
+            class="fas fa-play"></i></button>
+        </div>
+        <div class="musicInfo">
+          <h3 class="fs-12 fw-400 pl-2 pt-3 color-wh">{{ item.name }}</h3>
+          <h4 class="fs-12 fw-400 pl-2 pb-3 color-wh color-sv">{{ item.band }}</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="pt-5 mb-4 pb-5 border-top">
+    <p class="fs-12 color-sv">@ Copyright 2021 Waveme Theme. All Rights Reserved</p>
+    <ul class="navbar-nav fs-12 color-wh flex-row">
+      <li class="nav-item pr-2">Service Terms</li>
+      <li class="nav-item pr-2">Music Policy</li>
+      <li class="nav-item pr-2">Cookie Warnings</li>
+      <li class="nav-item pr-2">Support</li>
+      <li class="nav-item pr-2">Feedback</li>
+    </ul>
+  </footer>
+>>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
   

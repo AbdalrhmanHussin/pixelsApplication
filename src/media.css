@@ -45,7 +45,7 @@
     display: none !important;
   } */
 
-  form {
+  nav form {
     display: block !important;
     position: absolute !important;
     z-index: 1000;
@@ -54,10 +54,6 @@
     left: 0;
     border-radius: 0;
     height: 100%;
-  }
-
-  form input {
-
   }
 
   .navbar-nav .container-fluid.grid-custom {
@@ -231,3 +227,10 @@
     font-size: 9px;
   }
 }
+@media only screen and (max-width:480px) {
+  .footer ul {
+    font-size: 9px;
+  }
+
+}
+

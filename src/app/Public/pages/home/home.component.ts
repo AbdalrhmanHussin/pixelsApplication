@@ -9,52 +9,49 @@ declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['../pages.css']
 })
 export class HomeComponent implements OnInit {
 
   private limit: number =10;
-  //Popular
-  PopularSlides:any = this.read.Popular;
-  NewSlides:any = this.read.New;
-  alltrackes:Music[] = [];
- //iserror:boolean=false;
-  
+  popular:Music[]    = [];
+  newRelease:Music[] = [];
+  rand:Music[]       = [];
+  windowWidth:number = 0;
 
   constructor(public owl:PagesComponent,public read:ReadConfigService,public user:UserConfigService) { }
   
   
   ngOnInit(): void {
+    this.windowWidth = window.innerWidth;
     //init the page to regular form
     $('.tb-page').removeAttr('style');
-    this.read.getalltracks(this.limit).subscribe((musics: Music[]) => {
-         this.alltrackes = musics;
-         setTimeout(() => {
-          this.owl.loadOwl('5rowInit')
-          this.owl.loadOwl('4rowInit')
-        }, 10); 
+
+    //Render Sorting of musics: Popular
+    this.read.getalltracks(this.limit,'popular').subscribe((musics: Music[]) => {
+      this.popular = musics;
+      setTimeout(() => {
+        this.owl.loadOwl('4rowInit')
+      }, 100); 
     });
-    
+
+    //Render Sorting of musics: New Release
+    this.read.getalltracks(this.limit,'release').subscribe((musics: Music[]) => {
+      this.newRelease = musics;
+      setTimeout(() => {
+        this.owl.loadOwl('5rowInit');
+      },100);
+    });
+
+    //Render Sorting of musics: Random
+    this.read.getalltracks(this.limit,'random').subscribe(async (musics: Music[]) => {
+      this.rand = musics;
+      setTimeout(() => {
+        this.owl.loadOwl('5rowInitLooper');
+      },100);
+      
+    });
+
   }
   
-  gettrackeByID(id:number):void{
-      this.read.gettrackeByID(id).subscribe((res:{message:string,music:Music})=>{
-        if(res.message==='success'){
-          this.read.musictrack.next([
-            res.music.src,
-            res.music.name,
-            res.music.band,
-            res.music.img,
-            res.music.id
-          ]);
-        }
-        console.log(res);
-        
-        
-      }, error => {
-        console.error(error);
-      });
-  }
-
- 
 }

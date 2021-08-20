@@ -36,7 +36,7 @@
     </div>
     <div class="playlist-body mt-5" *ngIf="(playlistMusicCount > 0) true : false;">
         <Div class="song-list  container-fluid align-items-center" *ngFor="let item of playlistData.musics;let indexEle=index" #song >
-            <button class="playbtn" #div (click)="getPlaylistAction(indexEle)">
+            <button class="playbtn d-none" #div (click)="getPlaylistAction(indexEle)">
               <i class="fas fa-play"></i>
             </button>
             <div class="song-info d-flex align-items-center ml-3" >

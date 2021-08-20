@@ -1,19 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {
-  Component,
-  Output,
-  EventEmitter,
-  OnInit
-} from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute, Router,NavigationEnd } from '@angular/router';
-import {
-  ReadConfigService
-} from 'src/app/Services/read-config.service';
-import { playlist } from 'src/app/_model/playlist';
+import { ReadConfigService } from 'src/app/Services/read-config.service';
 import { WriteService } from 'src/app/Services/write.service';
 import { filter } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
-
 
 @Component({
   selector: 'app-playlist',
@@ -50,27 +40,44 @@ export class PlaylistComponent implements OnInit {
   jsonStatus = JSON.parse(localStorage.getItem('playingType') || '{}');
 
   playlistDisplayImg:any = "../../../../assets/images/noimg.jfif";
+
+  activeItem:any;
+
+  activePlaylist = JSON.parse(localStorage.getItem('playingType') || '{}').id;
+
+  activeSong:any;
   
+  //load playlist 
   getPlaylistAction(index:number = 0) {
+
     let data = {
       'playingType': 'playlist',
       'id'         :  this.id
     }
-    localStorage.setItem('playingType',JSON.stringify(data));
     this.transferePlaylist(this.playlistArray,index);
     this.getActiveList();
   }
 
+  //add the playlist to the payload in music components 
   transferePlaylist(playlist:any,playCounter:number = 0) {
-    this.write.playlist.next({playlist,playCounter});
+    let playing = this.playlistData.id;
+    this.write.playCounterActive.subscribe((res)=>{
+      this.activeSong = res;
+      console.log(res)
+      this.addActiveForce(res,playing); 
+    })
+    this.write.playingMode.next({mode:'playlist',playlist:playing});
+    this.write.playlist.next({playing,playlist,playCounter});
   }
   
+  //get the image and the name of active song
   getActiveList() {
     this.write.playlistDisplayImg.subscribe((res) => {
        this.playlistDisplayImg = res;
     });
   }
 
+  //change the return playlist from database from json to array
   playlistFormate(playlistInsert:any) {
     let playArray:any = [];
     let playlist:any  = playlistInsert[0];
@@ -80,16 +87,18 @@ export class PlaylistComponent implements OnInit {
     this.playlistDisplayImg = this.playlistData.musics[0].img ?? '';
     this.playlistData.musics.forEach((element:any) => {
         let chunk = [element.src,element.name,element.band,element.img,element.id]
-        console.log(chunk);
         playArray.push(chunk);
         this.playlistArray = playArray;
     });
+    // this.addActiveForce( this.activeSong);
   }
 
+  //delete item from payload
   removeFromPayload(musicID:number,playlistID:number) {
     this.write.deleteFromList.next({musicID,playlistID});
   }
 
+  //delete the relation between music and playlist in database
   removeRelationMusicPlaylist(id:any,div:HTMLElement) {
     let playlist = this.playlistID;
     let sanctum  = localStorage.getItem('User');
@@ -103,11 +112,14 @@ export class PlaylistComponent implements OnInit {
     });
   };
 
-  ngOnInit(): void {
-    this.write.playlistPayload.subscribe((res)=>{
-      console.log(res);
-    })
-    
+  addActiveForce(num:number,workingPlaylist:number) {
+     if(workingPlaylist == this.activePlaylist) {
+      $('.song-list.active').removeClass('active');
+      $('.song-list').eq(num).addClass('active');
+     }
+  }
+
+  ngOnInit(): void {    
     //init the page in playlist
     if(this.playlistPage) {
       $('.tb-page').css({
@@ -131,19 +143,23 @@ export class PlaylistComponent implements OnInit {
         })
 
         this.read.getPlaylistMusics(this.id).subscribe(res => {
-          this.playlistFormate(res); 
+          let data:any = res[0];
+          if(data[0] == undefined) {
+            this.router.navigateByUrl('notfound');
+          } else {
+            this.playlistFormate(res); 
+          }
         });
 
       } else if(this.id == 0){
         this.write.playlistPayload.subscribe((res)=>{
           this.playlistData = res;
           this.playlistMusicCount = this.playlistData.length;
-          console.log(res);
         });
       } else {
-        alert(this.id);
         this.router.navigateByUrl('notfound');
       }
+     
     });
 
   }

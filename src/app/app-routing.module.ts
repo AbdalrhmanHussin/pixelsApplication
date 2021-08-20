@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
+import { AllComponent } from './all/all.component';
 import { BrowseComponent } from './Public/pages/browse/browse.component';
-import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { HomeComponent } from './Public/pages/home/home.component';
 import { NewreleaseComponent } from './Public/pages/newrelease/newrelease.component';
 import { NotFoundComponent } from './Public/pages/not-found/not-found.component';
@@ -8,6 +8,7 @@ import { PagesComponent } from './Public/pages/pages.component';
 import { PlayingComponent } from './Public/pages/playing/playing.component';
 import { PlaylistComponent } from './Public/pages/playlist/playlist.component';
 import { ProfileComponent } from './Public/pages/profile/profile.component';
+import { SinglemusicComponent } from './Public/pages/singlemusic/singlemusic.component';
 import { LoginComponent } from './Public/users/login/login.component';
 import { SettingProfileComponent } from './Public/users/setting-profile/setting-profile.component';
 import { SignupComponent } from './Public/users/signup/signup.component';
@@ -23,15 +24,30 @@ const routes: Routes = [
       },
       {
         path: 'browse',
-        component: BrowseComponent
+        component: BrowseComponent,
+        children: [
+          {
+            path: 'browse/all',
+            component: AllComponent
+          }
+        ]
+      },
+      {
+        path: 'single/:id',
+        component: SinglemusicComponent
       },
       {
         path: 'newrel',
         component: NewreleaseComponent
       },
       {
+<<<<<<< HEAD
         path: 'charts',
         component:ChartsComponent
+=======
+        path: 'newrel',
+        component: NewreleaseComponent
+>>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
       },
       {
         path: 'profile',
