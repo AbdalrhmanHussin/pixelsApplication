@@ -14,8 +14,8 @@ export class WriteService {
   public playlistDisplayImg: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public playlistPayload: BehaviorSubject<any>    = new BehaviorSubject<any>(null);
   public loadedMusic: BehaviorSubject<any>        = new BehaviorSubject<any>(null);
-  public playingMode: BehaviorSubject<any>        = new BehaviorSubject<any>(null)       
-
+  public playingMode: BehaviorSubject<any>        = new BehaviorSubject<any>(null);  
+  public playlistActive:boolean     = false;  
 
   constructor(private http:HttpClient) { }
 

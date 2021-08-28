@@ -14,12 +14,12 @@
 }
 
 .owl-theme .owl-nav [class*=owl-]:hover {
-  color: #ccc;
+  color: var(--grey);
 }
 
 .owl-next.disabled,
 .owl-prev.disabled {
-  color: #ccc !important;
+  color: var(--grey) !important;
 }
 
 /* owl controls */
@@ -44,12 +44,12 @@
 .owl-carousel .owl-next {
   width: 40px;
   height: 40px;
-  background: #fff !important;
+  background: var(--colorWhite) !important;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  color: #000;
+  color: var(--black);
 }
 
 .owl-carousel .owl-prev {

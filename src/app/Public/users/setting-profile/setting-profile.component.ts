@@ -17,13 +17,15 @@ export class SettingProfileComponent implements OnInit {
     name: ''
   };
   err:any;
-  
+  token:any = localStorage.getItem('User') ?? null;
+
 
   constructor(private userset:UserConfigService, private settingService:SettingService,private notifyService : NotificationService) { }
   
 
 
   ngOnInit(): void {
+    if(this.token == null) window.location.href = '/';
     this.userset.getUser().subscribe((res: user)=>{
       this.userGet = res;
       console.log(res);

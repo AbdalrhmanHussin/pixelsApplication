@@ -7,7 +7,7 @@
 :root {
     --black: #010305;
     --sliver: #ccc;
-    --dark-sliver: #101316;
+    --dark-sliver: #15181b;
     --white: #ffff ;
     --grey: #818383;
     --borderColor: #dee2e617;
@@ -35,7 +35,7 @@ body {
 }
 
 .linear-black {
-  background: linear-gradient(45deg, black, transparent);
+  background: linear-gradient(45deg, var(--black), transparent);
 }
 
 .trans-me {
@@ -45,7 +45,7 @@ body {
 
 /* color pattern*/
 .color-wh {
-  color: white !important;
+  color: var(--colorWhite) !important;
 }
 
 .color-gr {
@@ -268,7 +268,7 @@ nav {
   display: block;
   height: 15px;
   width: 14px;
-  background: #fff;
+  background: var(--colorWhite);
   border-radius: 20px;
   position: absolute;
   left: 0;

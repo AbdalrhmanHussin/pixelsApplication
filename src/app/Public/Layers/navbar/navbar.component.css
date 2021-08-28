@@ -24,7 +24,7 @@ nav form input {
     border: none !important;
     outline-offset: 0;
     outline: none;
-    background: #202326 !important;
+    background: var(--dark-gray) !important;
     height: 33px !important;
 }
 nav form label {

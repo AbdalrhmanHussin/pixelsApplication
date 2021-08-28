@@ -54,6 +54,7 @@ export class PlaylistComponent implements OnInit {
       'playingType': 'playlist',
       'id'         :  this.id
     }
+    localStorage.setItem('playingType',JSON.stringify(data));
     this.transferePlaylist(this.playlistArray,index);
     this.getActiveList();
   }
@@ -61,6 +62,8 @@ export class PlaylistComponent implements OnInit {
   //add the playlist to the payload in music components 
   transferePlaylist(playlist:any,playCounter:number = 0) {
     let playing = this.playlistData.id;
+    this.write.playlistActive = true;
+    console.log(this.write.playlistActive);
     this.write.playCounterActive.subscribe((res)=>{
       this.activeSong = res;
       console.log(res)

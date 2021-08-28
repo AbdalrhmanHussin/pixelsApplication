@@ -23,15 +23,10 @@ import { NotFoundComponent } from './Public/pages/not-found/not-found.component'
 import { ProfileComponent } from './Public/pages/profile/profile.component';
 import { OverlayComponent } from './Public/Layers/overlay/overlay.component';
 import { PlayingComponent } from './Public/pages/playing/playing.component';
-<<<<<<< HEAD
 import { SettingProfileComponent } from './Public/users/setting-profile/setting-profile.component';
-import { ChartsComponent } from './Public/pages/charts/charts.component';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
-=======
 import { AllComponent } from './all/all.component';
 import { SinglemusicComponent } from './Public/pages/singlemusic/singlemusic.component';
-
->>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,13 +47,10 @@ import { SinglemusicComponent } from './Public/pages/singlemusic/singlemusic.com
     NotFoundComponent,
     ProfileComponent,
     PlayingComponent,
-<<<<<<< HEAD
     SettingProfileComponent,
-    ChartsComponent,
-=======
-    AllComponent,
     SinglemusicComponent,
->>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
+    AllComponent,
+
   ],
   imports: [
     BrowserModule,

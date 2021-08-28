@@ -12,12 +12,6 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-<<<<<<< HEAD
-  constructor(private http:HttpClient,private userset:UserConfigService) { }
-  userGet:any ;
-  ngOnInit(): void {
-    this.userset.getUser().subscribe((res: user)=>{
-=======
   baseURL = "http://127.0.0.1:8000/api/musics/";
   public searchQuery: string = "";
   activeSearch:boolean = false;
@@ -40,7 +34,7 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
     this.windowResize();
 
     let resize = () => {
@@ -71,10 +65,10 @@ export class NavbarComponent implements OnInit {
         $('nav form').removeClass('active');
        }
     });
-    this.userset.getUser().subscribe((res: user[]) => {
->>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
+    this.userset.getUser().subscribe((res: user) => {
       this.userGet = res;
     });
+    console.log(this.userset.user());
     this.getAllSearch();
   }
   getAllSearch() {

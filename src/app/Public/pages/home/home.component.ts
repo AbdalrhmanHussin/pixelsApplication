@@ -14,6 +14,7 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   private limit: number =10;
+  token:any = localStorage.getItem('User') ?? false;
   popular:Music[]    = [];
   newRelease:Music[] = [];
   rand:Music[]       = [];

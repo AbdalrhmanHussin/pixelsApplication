@@ -12,7 +12,7 @@
        <img class="musicPlayerImg" src="{{playImg}}" id="musicImg">
        <div class="d-grid timeSettings w-100">
            <div class="nameTime d-flex justify-content-between">
-               <h4 class="mb-0 mt-0"><span class="songName text-white fs-11" id="sn">{{ songTitle }}</span><span class="singerName pl-2 color-sv fs-11" id="an">{{ band }}</span></h4>
+               <h4 class="mb-0 mt-0"><span class="songName color-wh fs-11" id="sn">{{ songTitle }}</span><span class="singerName pl-2 color-sv fs-11" id="an">{{ band }}</span></h4>
                <div class="time d-flex align-items-end pb-1">
                     <span class="current color-wh fs-11" id="curr">{{ curr }}</span>
                     <span class="color-gr fs-11">/</span>
@@ -35,8 +35,8 @@
       </div>
    </div>
    <Div class="d-flex align-items-center">
-    <div><i *ngIf=' payload.length!==0' [ngClass]="isLikeProps? 'fas' : 'far'" class="fa-heart" style="color: white;" (click)='toggelfavicon()'></i></div>
-    <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn">
+    <div><i *ngIf=' payload.length!==0 && token' [ngClass]="isLikeProps? 'fas' : 'far'" class="fa-heart color-wh"  (click)='toggelfavicon()'></i></div>
+    <div class="w-100 h-100 d-flex justify-content-center align-items-center playlistbtn color-wh">
         <ion-icon name="apps-outline"></ion-icon>
     </div>
    </Div>

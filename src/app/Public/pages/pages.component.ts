@@ -8,7 +8,6 @@ declare var $: any;
   styleUrls: []
 })
 export class PagesComponent implements OnInit {
-
   constructor(public read:ReadConfigService) { }
   loadOwl(req:string) {
     if(req == '4rowInit') {
@@ -122,7 +121,7 @@ export class PagesComponent implements OnInit {
         $(this).children('i').toggleClass('fa-play fa-pause');
         localStorage.setItem('playingType',JSON.stringify({'playingType':'music'}))
         playFn(id);
-    });   
+    });  
   }
 
 

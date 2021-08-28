@@ -1,144 +1,79 @@
-<div class="tb-page d-flex flex-column contaier justify-content-start align-item-center">
-    <ul class="navbar-nav flex-row Taber color-wh fs-13 mt-3 mb-4">
-        <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/home">Discover</a></li>
-        <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/browse">Browse</a></li>
-        <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/newrel">NewRelease</a></li>
-        <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/charts">charts</a></li>
-        <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/playlist">playlist</a></li>
-    </ul>
-    <div class="container containInfo ">
-        <div class="row ">
-            <div class="col Profile">
-                <div class="profilePicBox">
-                    <form action="#" method="POST">
-                        <img src="../../assets/images/prof.png" class="imgprof ">
-                        <input type="file" id="file">
-                        <label for="file" id="uploadBtn" class="fs-12">Choose Photo</label>
-                    </form>
-                </div>
-                <div class="infoProf">
-                    <h5 class="fs-13  color-wh">{{userGet?.name}}</h5>
-                    <span class="fs-12  color-gr">{{userGet?.email}}</span>
-                </div>
-            </div>
+<div class="d-flex flex-column contaier justify-content-start align-item-center mt-4">
+  <div class="container containInfo pt-5 pb-5">
+    <form #form (ngSubmit)="changeUserData(name)">
+      <div class="mt-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 input-grouprofil">
+          <label class="color-wh fs-14">Change Username</label>
+          <input type="text" class="form-control-profile" name="name" ngModel minlength="5" maxlength="20"
+            #name="ngModel" [(ngModel)]='userGet.name' placeholder="User Name">
         </div>
-        <form #form (ngSubmit)="changeUserData(name)">
-            <div class="row mt-4">
-                <div class="col-md-1"></div>
-                <div class="col-md-5 input-grouprofil">
-                    <input
-                            type="text"
-                            class="form-control-profile"
-                            name="name"
-                            ngModel
-                            minlength="5"
-                            maxlength="20"
-                            #name="ngModel"
-                            [(ngModel)]='userGet.name'
-                            placeholder="User Name">
-                </div>
 
-                <p  class="alert alert-danger"
-                    *ngIf="name?.touched && name?.errors?.minlength">name should be 8+ characters</p>
-                    <div class="col-md-5">
-                        <input
-                            type="submit"
-                            value="Submit"
-                            [disabled]="form.invalid"
-                            class="btn btn-block btn-outline-primary mt-5 color-wh px-5">
-                    </div>
-                    </div>
-                </form>
-                <form #form (ngSubmit)="changeUserEmail(email)">
-                    <div class="col-md-5 input-grouprofil">
-                      
-                        <input
-                        type="email"
-                        class="form-control-profile"
-                        name="email"
-                        ngModel
-                        #email="ngModel"
-                        email
-                        [(ngModel)]='userGet.email'
-                        placeholder="E-Mail">
-            </div>
-            <p  class="alert alert-danger"
-            *ngIf="err?.email?.length"
-        >{{err.email[0]}}</p>
-
-            <p  class="alert alert-danger"
-                *ngIf="email?.touched && email?.errors?.email"
-            >Your input doesn't match email format</p>
-            <div class="col-md-5">
-                        <input
-                            type="submit"
-                            value="Submit"
-                            [disabled]="form.invalid"
-                            class="btn btn-block btn-outline-primary mt-5 color-wh px-5">
-                    </div>
-                      </form>
-                      
-    
-                  
-    
-                
-           
-     
-        <div class="col-md-12 mt-1">
-            <h6 class="color-wh fs-13">Change Passward</h6>
+        <p class="alert alert-danger" *ngIf="name?.touched && name?.errors?.minlength">name should be 8+ characters</p>
+        <div class="col-md-5">
+          <input type="submit" value="Submit" [disabled]="form.invalid"
+            class="btn btn-block btn-outline-primary mt-2 color-wh px-5">
         </div>
-        <form #f (ngSubmit)="changePassword(f)">
-            <div class="row mt-4">
-                <div class="col-md-4 input-grouprofil">
-                    <input
-                        type="password"
-                        class="form-control-profile"
-                        name="oldpassword"
-                        
-                        placeholder="Current Passward">
-                </div>
-                <div class="col-md-4 input-grouprofil">
-                    <input type="password"
-                           class="form-control-profile"
-                          
-                           placeholder="New Passward"
-                           name="password"
-                           ngModel
-                           #newPassword="ngModel">
-                </div>
-                <div class="col-md-4 input-grouprofil">
-                    <input type="password"
-                           class="form-control-profile"
-                          
-                           placeholder="Confirm Password"
-                           name="password_confirmation"
-                           ngModel
-                           #passwordConfirm="ngModel">
-                </div>
+      </div>
+    </form>
+    <form #form (ngSubmit)="changeUserEmail(email)">
+      <div class="col-md-5 input-grouprofil">
+        <label class="color-wh fs-14">Change Email</label>
+        <input type="email" class="form-control-profile" name="email" ngModel #email="ngModel" email
+          [(ngModel)]='userGet.email' placeholder="E-Mail">
+      </div>
+      <p class="alert alert-danger" *ngIf="err?.email?.length">{{err.email[0]}}</p>
 
-                <p class="alert alert-danger"
-                     *ngIf="f.password_confirmation?.invalid && f.password_confirmation?.touched">Password Confirm is Required</p>
-
-                <p class="alert alert-danger" *ngIf="f.password_confirmation?.value !== f.password?.value && f.password_confirmation?.touched">Passwords are not equal</p>
-            </div>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <input type="submit"
-                           value="Submit"
-                           [disabled]="f.invalid || f.password_confirmation?.value !== f.password?.value ||!f.password?.value "
-                           class="btn btn-block btn-outline-primary mt-5 color-wh px-5">
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-        </form>
-   
- 
-    
+      <p class="alert alert-danger" *ngIf="email?.touched && email?.errors?.email">Your input doesn't match email format
+      </p>
+      <div class="col-md-5">
+        <input type="submit" value="Submit" [disabled]="form.invalid"
+          class="btn btn-block btn-outline-primary mt-2 color-wh px-5">
+      </div>
+    </form>
 
 
 
+    <div class="col-md-12 mt-3">
+      <h6 class="color-wh fs-13">Change Passward</h6>
+    </div>
+    <form #f (ngSubmit)="changePassword(f)">
+      <div class="mt-4">
+        <div class="col-md-5 input-grouprofil">
+          <input type="password" class="form-control-profile" name="oldpassword" placeholder="Current Passward">
+        </div>
+        <div class="col-md-5 input-grouprofil">
+          <input type="password" class="form-control-profile" placeholder="New Passward" name="password" ngModel
+            #newPassword="ngModel">
+        </div>
+        <div class="col-md-5 input-grouprofil">
+          <input type="password" class="form-control-profile" placeholder="Confirm Password"
+            name="password_confirmation" ngModel #passwordConfirm="ngModel">
+        </div>
+
+        <p class="alert alert-danger" *ngIf="f.password_confirmation?.invalid && f.password_confirmation?.touched">
+          Password Confirm is Required</p>
+
+        <p class="alert alert-danger"
+          *ngIf="f.password_confirmation?.value !== f.password?.value && f.password_confirmation?.touched">Passwords are
+          not equal</p>
+      </div>
+      <div class="">
+        <div class="col-md-5"></div>
+        <div class="col-md-5">
+          <input type="submit" value="Submit"
+            [disabled]="f.invalid || f.password_confirmation?.value !== f.password?.value ||!f.password?.value "
+            class="btn btn-block btn-outline-primary mt-2 color-wh px-5">
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+    </form>
 
 
-</div>
-<!-- <p *ngIf="isError" class="text-danger">userData has been updated successfully</p> -->
+
+
+
+
+
+
+  </div>

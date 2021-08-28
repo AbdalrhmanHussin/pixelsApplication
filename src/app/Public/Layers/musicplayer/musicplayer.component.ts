@@ -20,7 +20,7 @@ export class MusicplayerComponent implements OnInit {
     private write:WriteService) {
     
    }
-
+   token:any = localStorage.getItem('User') ?? null;
    path: any = 'https://drive.google.com/uc?export=download&id=';
    music = new Audio();
    interval: any;
@@ -313,7 +313,6 @@ export class MusicplayerComponent implements OnInit {
           this.ready(this.playCounter);
       } else {
         if (this.playlistLocker == 1) {
-           this.reset();
            this.load();
            this.play();
         } else {

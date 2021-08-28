@@ -90,7 +90,7 @@
 }
 
 .overlayer.player .play i {
-  background: #fff;
+  background: var(--colorWhite);
   color: var(--dark-gray);
   padding: 7px;
   font-size: 12px;
@@ -134,18 +134,16 @@
   border-bottom-right-radius: 4px;
 }
 
-.secBrowse1:hover,
-.secBrowse1:hover .overlay {
-  background-color: #1a1f24;
-  opacity: 1;
+.secBrowse1 {
+  background-color: var(--dark-gray);
 }
 
 /* Music Container */
 .containBox {
   width: 100%;
   height: 450px;
-  background-color: #121416;
-  color: white;
+  background-color: var(--dark-gray);
+  color: var(--colorWhite);
 }
 
 .btnContainBox {
@@ -154,7 +152,7 @@
   border-radius: 44px;
   border: 0;
   outline: none;
-  background-color: white;
+  background-color: var(--colorWhite);
   color: var(--black);
   margin-left: 37%;
 }
@@ -176,14 +174,14 @@
 }
 
 .overlay-bx ion-icon {
-  color: var(--white);
+  color: var(--colorWhite);
   font-size: 19px;
   padding: 10px;
   cursor: pointer;
 }
 
 .overlay-bx .play {
-  background: #fff;
+  background:var(--colorWhite);
   color: var(--black);
   font-size: 12px;
   border-radius: 50%;

@@ -1,10 +1,3 @@
-<ul class="navbar-nav flex-row Taber color-wh fs-13 mb-5">
-  <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/home">Discover</a></li>
-  <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/browse">Browse</a></li>
-  <li  class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/newrel">NewRelease</a></li>
-  <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']"  routerLink="/charts">charts</a></li>
-  <li class="pr-3"><a [routerLinkActive]="['routerLinkActives']" routerLink="/playlist">playlist</a></li>
-</ul>
 <section class="category mt-5">
   <h3 class="fs-17 fw-500 color-wh  pb-2">Popular Musics</h3>
   <div class="owl-carousel fourOwl owl-theme">
@@ -13,7 +6,7 @@
         <img [src]="item.img">
         <div class="overlayer  top-0 position-absolute w-100 h-100 align-items-start  p-2 linear-black player">
           <div class="position-relative w-100 h-100 justify-content-between flex-column d-flex">
-            <button class="menu trans-me w-100 d-flex justify-content-end align-items-center color-wh fs-11" [id]="item.id">
+            <button class="menu trans-me w-100 d-flex justify-content-end align-items-center color-wh fs-11" *ngIf="token" [id]="item.id">
               <i class="fas fa-ellipsis-v"></i></button>
             <div class="toggles">
             </div>
@@ -38,7 +31,7 @@
     <div class="tb-music-box-sm secBrowse1  d-grid" *ngFor="let item of newRelease">
       <img src="{{ item.img }}">
       <div class="overlay-bx">
-        <ion-icon name="ellipsis-vertical-outline" class="icon1 menu" [id]="item.id"></ion-icon>
+        <ion-icon name="ellipsis-vertical-outline" class="icon1 menu" *ngIf="token" [id]="item.id"></ion-icon>
         <button class="trans-me pr-2 color-sv play" id="{{ item.id }}"><i
           class="fas fa-play"></i></button>
       </div>
@@ -50,22 +43,12 @@
   </div>
 </section>
 <section class="category mt-5">
-  <div class="containBox mt-4 ">
-    <div class="containContainerBox pt-4">
-      <h3 class="text-center mt-5 pt-5">Discover songs you’ll love</h3>
-      <p class="text-center  pt-3 fs-13">Find the most popular artists and listen their music. Create your own<br>
-        playlist when listening to them.</p>
-      <button class="btnContainBox mt-3 fs-13">Explore the new music</button>
-    </div>
-  </div>
-</section>
-<section class="category mt-5">
   <h3 class="fs-17 fw-500 color-wh  pb-2">Random Picks</h3>
   <div class="owl-carousel fiveOwlLooper mb-3">
     <div class="tb-music-box-sm secBrowse1  d-grid" *ngFor="let item of rand">
       <img src="{{ item.img }}">
       <div class="overlay-bx">
-        <ion-icon name="ellipsis-vertical-outline" class="icon1 menu" [id]="item.id"></ion-icon>
+        <ion-icon name="ellipsis-vertical-outline" class="icon1 menu" *ngIf="token" [id]="item.id"></ion-icon>
         <button class="trans-me pr-2 color-sv play" id="{{ item.id }}"><i
           class="fas fa-play"></i></button>
       </div>
@@ -87,22 +70,3 @@
   </ul>
 </footer>
 
-<<<<<<< HEAD
-<form action="">
-    email
-   password
-</form>
-
-<form>
-  username
-</form>
-
-<form>
-   email
-</form>
-
-<form>
-   password
-</form>
-=======
->>>>>>> 7cf219b545311f676706e88e2e1b564d79f6c7d5

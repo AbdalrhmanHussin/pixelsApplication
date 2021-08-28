@@ -41,13 +41,8 @@ const routes: Routes = [
         component: NewreleaseComponent
       },
       {
-<<<<<<< HEAD
-        path: 'charts',
-        component:ChartsComponent
-=======
         path: 'newrel',
         component: NewreleaseComponent
->>>>>>> a4ddd02924eeb154ec51c812b56e49e51df9279a
       },
       {
         path: 'profile',
@@ -65,12 +60,13 @@ const routes: Routes = [
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'
-      }
+      },
+      {path:'Settingprofile' , component:SettingProfileComponent},
+
   ]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'Register', component: SignupComponent },
-  {path:'Settingprofile' , component:SettingProfileComponent},
+  { path: 'register', component: SignupComponent },
   { path: 'playlist/:id', component: PlaylistComponent },
   { path: 'playlist', component: PlaylistComponent },
   { path: '**', component: NotFoundComponent  }
